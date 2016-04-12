@@ -8,41 +8,38 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ReminderApplication.ViewListActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:fillViewport="true">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/todoList"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/FAB" />
 
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/todoList"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/FAB"
+
+            android:nestedScrollingEnabled="false" />
+
+    </ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:clickable="true"
         android:id = "@+id/FAB"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginBottom="58dp"
+        android:layout_marginEnd="38dp"
+        android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
+        android:onClick="onFABClick"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/todoList"
-        android:layout_alignEnd="@+id/todoList"
-        android:layout_marginEnd="25dp"
-        android:src="@android:drawable/ic_input_add"
-        android:onClick="onFABClick" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Incomplete Reminders: 0"
-        android:id="@+id/incompleteCount"
-        android:layout_alignBottom="@+id/FAB"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp" />
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView" />
 
 </RelativeLayout>

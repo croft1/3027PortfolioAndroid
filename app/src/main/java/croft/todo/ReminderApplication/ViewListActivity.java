@@ -1,23 +1,28 @@
 package croft.todo.ReminderApplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import croft.todo.R;
+import croft.todo.ViewDetailedReminderActivity;
 
 public class ViewListActivity extends AppCompatActivity {
     public static final int ADD_REMINDER_REQUEST = 0;
 
     private ListView reminderList;
-    private ToDoItemdapter  adapter;
-    private ArrayList<Reminder> reminders;
-
+    private ToDoItemdapter adapter;
+    private static ArrayList<Reminder> reminders;
+    private CheckBox completeBox;
 
 
     @Override
@@ -29,6 +34,7 @@ public class ViewListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_list);
 
         reminderList = (ListView) findViewById(R.id.todoList);
+        completeBox = (CheckBox) findViewById(R.id.viewCompleteCheck);
 
         reminders = new ArrayList<Reminder>();
 
@@ -38,44 +44,91 @@ public class ViewListActivity extends AppCompatActivity {
 
         reminderList.setAdapter(adapter);
 
-        updateIncompleteCount();
+        //updateIncompleteCount();
 
     }
 
-    public void onFABClick(View v){
+    public void onFABClick(View v) {
         Intent i = new Intent(ViewListActivity.this, addReminderActivity.class);
         startActivity(i);
         //finish();             want to be able to return if user presses back
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == ADD_REMINDER_REQUEST){
-            if(resultCode == RESULT_OK){
+        if (requestCode == ADD_REMINDER_REQUEST) {
+            if (resultCode == RESULT_OK) {
                 Reminder r = data.getParcelableExtra("result");
                 reminders.add(r);
 
                 adapter.notifyDataSetChanged();
-                updateIncompleteCount();
+                //updateIncompleteCount();
             }
         }
     }
 
-    private void updateIncompleteCount(){
-        int total = Reminder.totalIncomplete;
-        TextView incompleteText = (TextView) findViewById(R.id.incompleteCount);
-        incompleteText.setText("Incomplete Reminders: " + total);
+
+    /*public void onClick(View v) {
+        Reminder selected = reminders.get(reminderList.indexOfChild(v));
+        if (v.isSelected()) {
+            Reminder.totalIncomplete++;
+        } else {
+            Reminder.totalIncomplete--;
+        }
+        selected.setComplete(v.isSelected());
+        //updateIncompleteCount();
+
+
+    }*/
+
+    public void doAlertDialog(String title, String message) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title).setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setCancelable(false);
+        builder.create().show();
     }
 
+    /* public void updateIncompleteCount(){
+         setTitle("Incomplete Reminders: " + Reminder.totalIncomplete);
+     }//TODO isssues with setting onClick to checkbox in list
 
+ */
     public void populateDummyData() {
 
+        for (int i = 0; i < 3; i++) {
 
-        Reminder s = new Reminder("First", "To finish this assignment", "12/11/1888");
-        Reminder t = new Reminder("Second", "almost there Our main activity needs to get the ListView instance from the inflated layout and then the best thing in the world is the grae t nasinf jkelna" , "02/01/3632");
+            Reminder t = new Reminder(Integer.toString(i), "almost there Our main activity needs to get the ListView instance from the inflated layout and then the best thing in the world is the grae t nasinf jkelna", ("02/01/" + (3000 + i)));
+            reminders.add(t);
+        }
 
-        reminders.add(s);
-        reminders.add(t);
     }
+
+    public ArrayList<Reminder> getReminderList() {
+        return reminders;
+    }
+
+    public void listItemClicked(View v){
+        Reminder reminder = reminders.get(reminderList.indexOfChild(v));
+        Intent i = new Intent(this, ViewDetailedReminderActivity.class);
+        i.putExtra("reminder", reminder);
+        startActivity(i);
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+
+
+    }
+
 }

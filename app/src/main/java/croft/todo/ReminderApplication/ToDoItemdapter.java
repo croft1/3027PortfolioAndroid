@@ -57,8 +57,8 @@ public class ToDoItemdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.list_view_item, null);
 
             vh = new ViewHolder();
-            vh.title = (TextView) view.findViewById(R.id.viewTitle);
-            vh.description = (TextView) view.findViewById(R.id.viewDescription);
+            vh.title = (TextView) view.findViewById(R.id.titleLabel);
+            vh.description = (TextView) view.findViewById(R.id.descriptionLabel);
             vh.date = (TextView) view.findViewById(R.id.viewDate);
             vh.completed = (CheckBox) view.findViewById(R.id.viewCompleteCheck);
 

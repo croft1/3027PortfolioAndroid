@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View v){
         Intent i;
+        Toast toast;
         switch(v.getId()) {
             case R.id.tute2Button:
                 i = new Intent(MainActivity.this, CalculatorMain.class);
@@ -35,8 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 i = new Intent(MainActivity.this, ViewListActivity.class);
                 startActivity(i);
                 break;
+            case R.id.tute4ButtonRecycler:
+                toast = Toast.makeText(this, "Available soon!", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
             default:
-                Toast toast = Toast.makeText(this, "Unable to start activity", Toast.LENGTH_SHORT);
+                toast = Toast.makeText(this, "Button has not been assigned an action", Toast.LENGTH_SHORT);
                 toast.show();
         }
     }

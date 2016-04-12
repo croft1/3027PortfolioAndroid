@@ -46,4 +46,28 @@
         android:layout_alignLeft="@+id/tute3Button"
         android:layout_alignStart="@+id/tute3Button"
         android:onClick="onClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tute 4: View List w/ Recycler"
+        android:id="@+id/tute4ButtonRecycler"
+        android:layout_below="@+id/tute4Button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tute4Button"
+        android:layout_alignEnd="@+id/tute4Button"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tute 5: List with SQL"
+        android:id="@+id/tute5Button"
+        android:layout_below="@+id/tute4ButtonRecycler"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onClick" />
 </RelativeLayout>

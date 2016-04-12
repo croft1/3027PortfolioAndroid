@@ -1,5 +1,8 @@
 package croft.todo.ReminderApplication;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +11,7 @@ import java.util.Date;
 /**
  * Created by Michaels on 26/3/2016.
  */
-public class Reminder {
+public class Reminder implements Parcelable{
 
     String title;
     String description;
@@ -43,6 +46,37 @@ public class Reminder {
 
     }
 
+    public Reminder(Parcel in){
+        title = in.readString();
+        description = in.readString();
+        dueDate = new Date(in.readLong());
+
+    }
+
+    public static final Creator<Reminder> CREATOR = new Creator<Reminder>() {
+        @Override
+        public Reminder createFromParcel(Parcel in) {
+            return new Reminder(in);
+        }
+        @Override
+        public Reminder[] newArray(int size) {
+            return new Reminder[size];
+        }
+    };
+
+    // used to describe special objects, not modified bery often
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // outputs the format the parcel writes values
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeLong(dueDate.getTime());
+    }
 
     public String getTitle() {
         return title;
@@ -79,6 +113,11 @@ public class Reminder {
 
     public void setComplete(boolean complete) {
         this.complete = complete;
+        if(complete){
+            totalIncomplete --;
+        }else{
+            totalIncomplete ++;
+        }
     }
 
 
