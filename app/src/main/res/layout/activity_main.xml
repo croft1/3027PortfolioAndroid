@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="croft.todo.MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tute 4: View List"
+        android:id="@+id/tute4Button"
+        android:onClick="onClick"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="108dp"
+        android:layout_alignRight="@+id/tute3Button"
+        android:layout_alignEnd="@+id/tute3Button"
+        android:layout_alignLeft="@+id/tute3Button"
+        android:layout_alignStart="@+id/tute3Button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tute 3: Star Wars Name Generator"
+        android:layout_marginTop="47dp"
+        android:id="@+id/tute3Button"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
