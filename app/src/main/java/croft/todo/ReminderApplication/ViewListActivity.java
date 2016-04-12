@@ -8,13 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import croft.todo.R;
-import croft.todo.ViewDetailedReminderActivity;
 
 public class ViewListActivity extends AppCompatActivity {
     public static final int ADD_REMINDER_REQUEST = 0;
@@ -40,12 +37,23 @@ public class ViewListActivity extends AppCompatActivity {
 
         populateDummyData();
 
+
         adapter = new ToDoItemdapter(this, reminders);
 
         reminderList.setAdapter(adapter);
 
         //updateIncompleteCount();
 
+
+
+    }
+
+    public void updateList(View v){
+        Reminder t = new Reminder("WIN", "almost there Our main activity needs to get the ListView instance from the inflated layout and then the best thing in the world is the grae t nasinf jkelna", ("02/01/" + (999)));
+
+        reminders.add(t);
+        adapter = new ToDoItemdapter(this, reminders);
+        reminderList.setAdapter(adapter);
     }
 
     public void onFABClick(View v) {
@@ -127,6 +135,11 @@ public class ViewListActivity extends AppCompatActivity {
     @Override
     public void onRestart(){
         super.onRestart();
+
+
+    }
+
+    public void sortList(){
 
 
     }

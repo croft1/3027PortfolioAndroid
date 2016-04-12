@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
                 toast = Toast.makeText(this, "Available soon!", Toast.LENGTH_SHORT);
                 toast.show();
                 break;
+            case R.id.tute5SuppButton:
+                i = new Intent(MainActivity.this, ViewListActivity.class);
+                startActivity(i);
+                break;
             default:
                 toast = Toast.makeText(this, "Button has not been assigned an action", Toast.LENGTH_SHORT);
                 toast.show();

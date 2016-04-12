@@ -69,5 +69,19 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:onClick="onClick"
+        android:nestedScrollingEnabled="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TUTE 5 Supplementary: Monster Party + SQLlite"
+        android:id="@+id/tute5SuppButton"
+        android:layout_below="@+id/tute5Button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tute5Button"
+        android:layout_alignEnd="@+id/tute5Button"
+        android:nestedScrollingEnabled="false"
         android:onClick="onClick" />
 </RelativeLayout>

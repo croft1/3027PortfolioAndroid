@@ -1,4 +1,4 @@
-package croft.todo;
+package croft.todo.ReminderApplication;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import croft.todo.R;
 import croft.todo.ReminderApplication.Reminder;
+import croft.todo.ReminderApplication.ViewListActivity;
 
 public class ViewDetailedReminderActivity extends AppCompatActivity {
     private TextView titleLabel;
@@ -41,8 +43,9 @@ public class ViewDetailedReminderActivity extends AppCompatActivity {
     }
 
     public void onClick(View v){
-         currentReminder.setComplete(completeCheckBox.isChecked());
-
+         //ViewListActivity listActivity = new ViewListActivity();
+        // v.getReminderList().setComplete(completeCheckBox.isChecked());
+//TODO don't know how to get complete to update in previous list
      }
 
 

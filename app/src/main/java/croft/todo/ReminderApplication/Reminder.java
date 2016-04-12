@@ -13,6 +13,8 @@ import java.util.Date;
  */
 public class Reminder implements Parcelable{
 
+
+
     String title;
     String description;
     Date dueDate;
@@ -52,6 +54,7 @@ public class Reminder implements Parcelable{
         dueDate = new Date(in.readLong());
 
     }
+
 
     public static final Creator<Reminder> CREATOR = new Creator<Reminder>() {
         @Override

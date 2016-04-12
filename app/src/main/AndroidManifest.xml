@@ -20,7 +20,9 @@
         <activity android:name=".NameGenerator.NameGenMain" />
         <activity android:name=".NameGenerator.NameViewActivity" />
         <activity android:name=".Calculator.CalculatorMain" />
-        <activity android:name=".ViewDetailedReminderActivity"></activity>
+        <activity android:name="croft.todo.MonsterMain" />
+        <activity android:name="croft.todo.AddMonsterActivity" />
+        <activity android:name=".ReminderApplication.ViewDetailedReminderActivity"></activity>
     </application>
 
 </manifest>
