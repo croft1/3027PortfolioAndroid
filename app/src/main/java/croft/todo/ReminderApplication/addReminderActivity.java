@@ -1,8 +1,10 @@
-package croft.todo;
+package croft.todo.ReminderApplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import croft.todo.R;
 
 public class addReminderActivity extends AppCompatActivity {
 

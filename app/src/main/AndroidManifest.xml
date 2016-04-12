@@ -15,8 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewListActivity" />
-        <activity android:name=".addReminderActivity"></activity>
+        <activity android:name=".ReminderApplication.ViewListActivity" />
+        <activity android:name=".ReminderApplication.addReminderActivity"></activity>
+        <activity android:name=".NameGenerator.NameGenMain" />
+        <activity android:name=".NameGenerator.NameViewActivity" />
+        <activity android:name=".Calculator.CalculatorMain" />
+
     </application>
 
 </manifest>

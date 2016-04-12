@@ -1,4 +1,4 @@
-package croft.todo;
+package croft.todo.ReminderApplication;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -34,14 +34,13 @@ public class Reminder {
         setDescription(newDescription);
 
 
-        totalIncomplete++;
     }
 
     public Reminder(String newTitle, String newDescription, Date date){
         setTitle(newTitle);
         setDescription(newDescription);
         setDueDate(date);
-        totalIncomplete++;
+
     }
 
 

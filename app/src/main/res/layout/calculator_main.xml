@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="croft.todo.CalculatorMain">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/firstNumberInput"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/secondNumberInput"
+        android:layout_alignStart="@+id/secondNumberInput"
+        android:layout_marginTop="28dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/additionButton"
+        android:layout_marginTop="29dp"
+        android:onClick="operationButtonPressed"
+        android:layout_below="@+id/firstNumberInput"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        android:id="@+id/multiplyButton"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:layout_alignTop="@+id/additionButton"
+        android:layout_toRightOf="@+id/additionButton"
+        android:onClick="operationButtonPressed"
+        android:clickable="true"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:id="@+id/divideButton"
+        android:layout_marginRight="43dp"
+        android:layout_marginEnd="43dp"
+        android:layout_alignTop="@+id/multiplyButton"
+        android:layout_toLeftOf="@+id/subtractButton"
+        android:onClick="operationButtonPressed"
+        android:clickable="true"
+        android:nestedScrollingEnabled="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:id="@+id/subtractButton"
+        android:onClick="operationButtonPressed"
+        android:clickable="true"
+        android:layout_above="@+id/secondNumberInput"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/secondNumberInput"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/multiplyButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CALCULATE"
+        android:id="@+id/calculate"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/button_material_light"
+        android:onClick="calculateButtonPressed"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/subtractButton"
+        android:layout_alignEnd="@+id/subtractButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/resultDisplayer"
+        android:text="=="
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:layout_below="@+id/secondNumView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/calculate"
+        android:layout_alignEnd="@+id/calculate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/selOperView"
+        android:textColor="@color/colorAccent"
+        android:text="++"
+        android:layout_below="@+id/firstNumView"
+        android:layout_alignRight="@+id/resultDisplayer"
+        android:layout_alignEnd="@+id/resultDisplayer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/firstNumView"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_marginTop="44dp"
+        android:text="++"
+        android:layout_below="@+id/secondNumberInput"
+        android:layout_alignRight="@+id/resultDisplayer"
+        android:layout_alignEnd="@+id/resultDisplayer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/secondNumView"
+        android:textColor="@android:color/holo_blue_bright"
+        android:text="++"
+        android:layout_below="@+id/selOperView"
+        android:layout_alignRight="@+id/resultDisplayer"
+        android:layout_alignEnd="@+id/resultDisplayer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center" />
+
+</RelativeLayout>

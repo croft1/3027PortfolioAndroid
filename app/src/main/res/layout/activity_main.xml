@@ -17,19 +17,33 @@
         android:text="Tute 4: View List"
         android:id="@+id/tute4Button"
         android:onClick="onClick"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="108dp"
-        android:layout_alignRight="@+id/tute3Button"
-        android:layout_alignEnd="@+id/tute3Button"
-        android:layout_alignLeft="@+id/tute3Button"
-        android:layout_alignStart="@+id/tute3Button" />
+        android:layout_below="@+id/tute3Button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tute 3: Star Wars Name Generator"
-        android:layout_marginTop="47dp"
         android:id="@+id/tute3Button"
+        android:onClick="onClick"
+        android:layout_below="@+id/tute2Button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tute 2: Calculator"
+        android:id="@+id/tute2Button"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/tute3Button"
+        android:layout_alignEnd="@+id/tute3Button"
+        android:layout_alignLeft="@+id/tute3Button"
+        android:layout_alignStart="@+id/tute3Button"
+        android:onClick="onClick" />
 </RelativeLayout>
