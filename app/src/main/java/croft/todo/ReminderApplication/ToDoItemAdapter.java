@@ -16,14 +16,13 @@ import croft.todo.R;
 /**
  * Created by Michaels on 12/4/2016.
  */
-public class ToDoItemdapter extends BaseAdapter {
+public class ToDoItemAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Reminder> reminders;
+    private int count;  //for adding count at the bottom
 
-
-
-    public ToDoItemdapter(Context context, ArrayList<Reminder> reminders) {
+    public ToDoItemAdapter(Context context, ArrayList<Reminder> reminders) {
         this.context = context;
         this.reminders = reminders;
     }
@@ -54,7 +53,7 @@ public class ToDoItemdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            view = inflater.inflate(R.layout.list_view_item, null);
+            view = inflater.inflate(R.layout.reminder_list_item, null);
 
             vh = new ViewHolder();
             vh.title = (TextView) view.findViewById(R.id.titleLabel);
@@ -77,11 +76,9 @@ public class ToDoItemdapter extends BaseAdapter {
         vh.date.setText(reminders.get(i).getDueDateString());
         vh.completed.setChecked(completed);
 
-        //if(reminders.get(i).getDueDate() )    //TODO compare dates
-        //  vh.date.setTextColor(Color.parseColor("#00FF00"));
-
-
         return view;
     }
+
+
 }
 

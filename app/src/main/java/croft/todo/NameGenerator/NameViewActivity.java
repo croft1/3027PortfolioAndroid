@@ -22,7 +22,7 @@ public class NameViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_name_view);
+        setContentView(R.layout.name_gen_activity);
 
         setTitle("Your Star Wars Name");
 

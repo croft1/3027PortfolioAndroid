@@ -11,18 +11,21 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ReminderApplication.ViewListActivity" />
         <activity android:name=".ReminderApplication.addReminderActivity" />
         <activity android:name=".NameGenerator.NameGenMain" />
         <activity android:name=".NameGenerator.NameViewActivity" />
         <activity android:name=".Calculator.CalculatorMain" />
-        <activity android:name="croft.todo.MonsterMain" />
-        <activity android:name="croft.todo.AddMonsterActivity" />
-        <activity android:name=".ReminderApplication.ViewDetailedReminderActivity"></activity>
+        <activity android:name=".MonsterParty.MonsterMain" />
+        <activity android:name=".MonsterParty.AddMonsterActivity" />
+        <activity android:name=".ReminderApplication.ViewDetailedReminderActivity" />
+
+
     </application>
 
 </manifest>

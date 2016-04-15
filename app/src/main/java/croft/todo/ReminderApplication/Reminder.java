@@ -1,5 +1,6 @@
 package croft.todo.ReminderApplication;
 
+import android.annotation.TargetApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 /**
  * Created by Michaels on 26/3/2016.
  */
-public class Reminder implements Parcelable{
+public class Reminder implements Parcelable, Comparable<Reminder>{
 
 
 
@@ -21,7 +22,22 @@ public class Reminder implements Parcelable{
     boolean complete = false;
     public static int totalIncomplete = 0;
 
-    public Reminder(String newTitle, String newDescription, String ddMMyyyy){
+    @TargetApi(19)      //not available to target API 14 we're running
+    public int compareTo(Reminder other){
+        if (getDueDate() == null || other.getDueDate() == null)
+            return 0;
+        return getDueDate().compareTo(other.getDueDate());
+    }
+
+    //default
+    public Reminder(){
+        setTitle("Undefined");
+        setDescription("Undefined");
+        setDueDate(new Date((long) 0));
+    }
+
+    //was gonna leave bool out of constructor. When editing values on detailed activity, recreating and storing objects couldnt have compelte changed. It was pointless to have another identical constructor with just the bool added in
+    public Reminder(String newTitle, String newDescription, String ddMMyyyy, boolean complete){
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date d = null;
@@ -37,14 +53,16 @@ public class Reminder implements Parcelable{
 
         setTitle(newTitle);
         setDescription(newDescription);
+        setComplete(complete);
 
 
     }
 
-    public Reminder(String newTitle, String newDescription, Date date){
+    public Reminder(String newTitle, String newDescription, Date date, Boolean completed){
         setTitle(newTitle);
         setDescription(newDescription);
         setDueDate(date);
+        setComplete(completed);
 
     }
 
@@ -52,6 +70,7 @@ public class Reminder implements Parcelable{
         title = in.readString();
         description = in.readString();
         dueDate = new Date(in.readLong());
+        complete = in.readByte() != 0;
 
     }
 
@@ -79,6 +98,7 @@ public class Reminder implements Parcelable{
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeLong(dueDate.getTime());
+        parcel.writeByte( (byte) (complete ? 1 : 0));
     }
 
     public String getTitle() {
@@ -121,6 +141,11 @@ public class Reminder implements Parcelable{
         }else{
             totalIncomplete ++;
         }
+    }
+
+    public String toString(){
+
+        return title + " is due on " + getDueDateString() + " and involves: " + description;
     }
 
 

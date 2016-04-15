@@ -1,4 +1,4 @@
-package croft.todo.LabFiveSupplementary;
+package croft.todo.MonsterParty;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -42,6 +42,7 @@ public class MonsterAdapter extends BaseAdapter {
         return i;
     }
     @Override
+
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder vh;
 // Check if view has been created for the row. If not, lets inflate it
@@ -49,7 +50,7 @@ public class MonsterAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 // Reference list item layout here
-            view = inflater.inflate(R.layout.list_monster_item, null);
+            view = inflater.inflate(R.layout.monster_list_item, null);
 // Setup ViewHolder and attach to view
             vh = new ViewHolder();
             vh.monsterName = (TextView) view.findViewById(R.id.monsterNameText);

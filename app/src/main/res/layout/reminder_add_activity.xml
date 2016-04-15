@@ -29,19 +29,19 @@
         android:hint="Description"
         android:layout_marginTop="129dp"
         android:layout_below="@+id/inputTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/inputDate"
-        android:layout_alignEnd="@+id/inputDate" />
+        android:layout_alignEnd="@+id/inputDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Reminder"
         android:id="@+id/addReminderButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

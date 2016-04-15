@@ -9,19 +9,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import croft.todo.R;
+
 
 public class addReminderActivity extends AppCompatActivity {
 
@@ -37,7 +34,7 @@ public class addReminderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_reminder);
+        setContentView(R.layout.reminder_add_activity);
         setTitle("Add Reminder");
 
         addReminder = (Button) findViewById(R.id.addReminderButton);
@@ -83,20 +80,23 @@ public class addReminderActivity extends AppCompatActivity {
 
         switch(v.getId()) {
             case R.id.addReminderButton:
-                String submittedtitle = inputTitle.getText().toString();
-                String submitteddescription = inputDescription.getText().toString();
+                String submittedTitle = inputTitle.getText().toString();
+                String submittedDescription = inputDescription.getText().toString();
                 String submittedDate = inputDate.getText().toString();
 
-                Reminder submittedReminder = new Reminder(submittedtitle, submitteddescription, submittedDate);
+                Reminder submittedReminder = new Reminder(submittedTitle, submittedDescription, submittedDate,false);
 
-                ViewListActivity listView = new ViewListActivity();
-                listView.getReminderList().add(submittedReminder);
 
-                t = Toast.makeText(getApplicationContext(), "Reminder created", Toast.LENGTH_SHORT);
 
                 Intent i = new Intent(this, ViewListActivity.class);
-                i.putExtra("restroom", submittedReminder);
-                startActivity(i);
+                i.putExtra("reminder", submittedReminder);
+                //ViewListActivity.addReminder(submittedReminder);
+
+                //startActivity(i);
+                t = Toast.makeText(getApplicationContext(), ("Reminder: " + submittedReminder.getTitle() + " created."), Toast.LENGTH_SHORT);
+
+                t.show();
+                setResult(RESULT_OK, i);
                 finish();
 
                 break;
@@ -129,29 +129,20 @@ public class addReminderActivity extends AppCompatActivity {
                     }
                 };
 
-                inputDate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        new DatePickerDialog(addReminderActivity.this, date, calendar
-                                .get(Calendar.YEAR),
-                                calendar.get(Calendar.MONTH),
-                                calendar.get(Calendar.DAY_OF_MONTH)).show();
-                    }
-                });
+                new DatePickerDialog(addReminderActivity.this, date, calendar
+                        .get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+
+
                 break;
 
             default:
                 t = Toast.makeText(getApplicationContext(), "Unassigned button", Toast.LENGTH_SHORT);
                 t.show();
-
-
         }
 
-
-
     }
-
 
     private void updateLabel() {
 
@@ -161,11 +152,4 @@ public class addReminderActivity extends AppCompatActivity {
         inputDate.setText(sdf.format(calendar.getTime()));
     }
 
-    public void createReminder(){
-
-
-
-        //Toast toast = Toast.makeText(context, text, duration);
-        // toast.show();
-    }
 }

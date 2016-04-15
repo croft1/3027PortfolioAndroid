@@ -1,4 +1,4 @@
-package croft.todo.LabFiveSupplementary;
+package croft.todo.MonsterParty;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,26 +22,30 @@ public class MonsterMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_monster_main);
+        setContentView(R.layout.monster_main_activity);
 
         partyList = (ListView) findViewById(R.id.listView);
         partyMonsters = new ArrayList<Monster>();
-        adapter = new MonsterAdapter(this, partyMonsters);
 
+        adapter = new MonsterAdapter(this, partyMonsters);
         partyList.setAdapter(adapter);
+
 
         updateMonsterCount();
 
 
     }
 
+    //when first building the options menu, this runs
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu_activity, menu);
+        inflater.inflate(R.menu.menu_activity_main, menu);
+        updateMonsterCount();
         return super.onCreateOptionsMenu(menu);
     }
 
+    //runs when item created onto menu is selected
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch ( item.getItemId()){
@@ -55,6 +59,7 @@ public class MonsterMain extends AppCompatActivity {
         }
     }
 
+    //after the activity that was run from pressing add finished, this runs
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -63,8 +68,8 @@ public class MonsterMain extends AppCompatActivity {
             if( resultCode == RESULT_OK){
                 Monster m = data.getParcelableExtra("result");
                 partyMonsters.add(m);
-
                 adapter.notifyDataSetChanged();
+
                 updateMonsterCount();
             }
         }
@@ -74,7 +79,6 @@ public class MonsterMain extends AppCompatActivity {
     private void updateMonsterCount(){
 
         int totalMonsters = partyMonsters.size();
-
         setTitle("Monsters: " + totalMonsters);
     }
 }

@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import croft.todo.Calculator.Calculator;
 import croft.todo.Calculator.CalculatorMain;
+import croft.todo.MonsterParty.MonsterMain;
 import croft.todo.NameGenerator.NameGenMain;
 import croft.todo.ReminderApplication.ViewListActivity;
 
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("FIT3027 - Portfolio Activities");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.portfolio_main);
     }
 
     public void onClick(View v){
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
                 break;
             case R.id.tute5SuppButton:
-                i = new Intent(MainActivity.this, ViewListActivity.class);
+                i = new Intent(MainActivity.this, MonsterMain.class);
                 startActivity(i);
                 break;
             default:

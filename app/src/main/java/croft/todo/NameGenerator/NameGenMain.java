@@ -6,7 +6,6 @@ package croft.todo.NameGenerator;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +29,7 @@ public class NameGenMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_name_gen_main);
+        setContentView(R.layout.name_main_activity);
         setTitle("Star Wars Name Generator");
 
         inputFirstName = (EditText) findViewById(R.id.inputFirstName);
