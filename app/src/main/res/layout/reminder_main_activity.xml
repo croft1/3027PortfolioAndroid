@@ -1,61 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<FrameLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BasicReminder.BasicViewListActivity"
-    android:clickable="true">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".BasicReminder.BasicViewListActivity"
+        android:clickable="true">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/scrollView"
-            android:fillViewport="true">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView"
+                android:fillViewport="true">
 
 
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/reminderList"
-                android:nestedScrollingEnabled="false"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:listSelector="@color/button_material_dark"
-                android:focusable="false"
-                />
-        </ScrollView>
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reminderList"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:focusable="true"
+                    android:longClickable="true"
+                    android:listSelector="@color/dim_foreground_material_dark" />
+            </ScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:clickable="true"
-        android:id = "@+id/FAB"
-        android:layout_marginRight="21dp"
-        android:layout_marginBottom="22dp"
-        android:layout_marginEnd="21dp"
-        android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
-        android:onClick="onFABClick"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <!--
-        <Button
+        <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:id = "@+id/FAB"
+            android:layout_marginRight="21dp"
+            android:layout_marginBottom="22dp"
+            android:layout_marginEnd="21dp"
+            android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
+            android:onClick="onFABClick"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:nestedScrollingEnabled="false"
-            android:onClick="updateList" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-
-            <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
-    -->
-
-</RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

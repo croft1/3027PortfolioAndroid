@@ -34,7 +34,7 @@ public class BasicViewDetailedReminderActivity extends AppCompatActivity {
         save = (Button) findViewById(R.id.saveButton);
 
         Intent i = getIntent();
-        currentBasicReminder = i.getParcelableExtra("reminder");
+        currentBasicReminder = i.getParcelableExtra("detailedReminder");
 
         setTitle(currentBasicReminder.getTitle());
         titleLabel.setText(currentBasicReminder.getTitle());
@@ -55,8 +55,8 @@ public class BasicViewDetailedReminderActivity extends AppCompatActivity {
                 //TODO edit text fields in detailed reminder
                 Intent i = new Intent(this, BasicViewListActivity.class);
                 i.putExtra("reminder", currentBasicReminder);
-                Toast.makeText(getApplicationContext(), "BasicReminder Complete?  " + currentBasicReminder.isComplete(), Toast.LENGTH_SHORT).show();
-                setResult(RESULT_OK);
+                Toast.makeText(getApplicationContext(), " Completion status: " + currentBasicReminder.isComplete(), Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK, i);
                 startActivity(i);
                 finish();
                 break;

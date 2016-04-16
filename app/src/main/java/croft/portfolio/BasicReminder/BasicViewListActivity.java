@@ -18,12 +18,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import croft.portfolio.BasicReminder.models.BasicReminder;
+import croft.portfolio.PersistentReminder.ViewDetailedReminderActivity;
 import croft.portfolio.R;
 
 public class BasicViewListActivity extends AppCompatActivity {
 
     public static final int ADD_REMINDER_REQUEST = 0;
-    public static final int MARK_COMPLETE_REQUEST = 1;
+    public static final int EDIT_REQUEST = 1;
 
     private ListView reminderListView;
     private BasicReminderItemAdapter adapter;
@@ -62,12 +63,14 @@ public class BasicViewListActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> av, View v, int i, long l) {
                     BasicReminder result = (BasicReminder)
                             reminderListView.getAdapter().getItem(i);
-                    Intent intent = new Intent();
-                    intent.putExtra("edit", result);
-                    setResult(RESULT_OK, intent);
+
+                    Intent intent = new Intent(BasicViewListActivity.this, BasicViewDetailedReminderActivity.class);
+                    intent.putExtra("detailedReminder", result);
+                    startActivityForResult(intent, EDIT_REQUEST);
                     finish();
                 }
-            });
+            }
+        );
     }
 
     public void onFABClick(View v) {
@@ -104,9 +107,11 @@ public class BasicViewListActivity extends AppCompatActivity {
                     sort = "Descending order";
                 } else {
                     Collections.sort(basicReminders);
-                    isSorted = true;
                     sort = "Ascending order";
                 }
+
+                isSorted = !isSorted;
+
                 toastHelper = Toast.makeText(getApplicationContext(), sort, Toast.LENGTH_SHORT);
                 toastHelper.show();
 
@@ -166,7 +171,7 @@ public class BasicViewListActivity extends AppCompatActivity {
                 }
                 break;
 
-            case MARK_COMPLETE_REQUEST:
+            case EDIT_REQUEST:
                 if (resultCode == RESULT_OK) {
 
 

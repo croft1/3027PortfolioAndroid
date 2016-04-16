@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import croft.portfolio.PersistentReminder.models.Reminder;
@@ -25,11 +26,11 @@ import croft.portfolio.R;
 public class MainViewListActivity extends AppCompatActivity {
 
     public static final int ADD_REMINDER_REQUEST = 0;
-    public static final int MARK_COMPLETE_REQUEST = 1;
+    public static final int EDIT_REQUEST = 1;
 
     private ListView reminderListView;
     private ReminderAdapter adapter;
-    private static ArrayList<Reminder> reminders = new ArrayList<Reminder>();
+    private static ArrayList<Reminder> reminders = new ArrayList<>();
     private Toast toastHelper;
     private static boolean isSorted;
     private DatabaseHelper dbHelper;
@@ -37,18 +38,30 @@ public class MainViewListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reminder_main_activity);
         setTitle("W5 - Persistent Reminder + SQL");
+        setContentView(R.layout.reminder_main_activity);
 
-        dbHelper = new DatabaseHelper((getApplicationContext()));
 
-        if (dbHelper.getAllReminders().size() == 0){
-            populateDummyData(4);
-        }
+
+        dbHelper = new DatabaseHelper(getApplicationContext());
+
 
         reminderListView = (ListView) findViewById(R.id.reminderList);
 
         adapter = new ReminderAdapter(this, reminders);
+
+        if (dbHelper.getAllReminders().size() == 0){
+            populateDummyData(4);
+            refreshListView();
+        }else{
+
+            ArrayList<Reminder> convertList = new ArrayList<>(dbHelper.getAllReminders().values());
+            reminders = convertList;
+
+        }
+
+        reminderListView.setChoiceMode(reminderListView.CHOICE_MODE_SINGLE);
+        reminderListView.setSelector(android.R.color.holo_blue_light);
         reminderListView.setAdapter(adapter);
 
 
@@ -58,10 +71,8 @@ public class MainViewListActivity extends AppCompatActivity {
                 Toast.makeText(MainViewListActivity.this, "Index clicked: " + String.valueOf(pos),Toast.LENGTH_SHORT).show();
             }
         });
-        /*
-        * long lcick ont working
-        reminderListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
 
+        reminderListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 
@@ -77,9 +88,12 @@ public class MainViewListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     //Remove from db
-                        //Reminder m = partyMonsters.remove(position);
-                        //dbHelper.removeMonsterFromParty(defaultParty, m);
+                        Reminder toRemove = reminders.get(position);
+                        reminders.remove(position);
+                        //dbHelper.removeMonsterFromParty(defaultParty, m);\
+                        dbHelper.removeReminder(toRemove);
                         refreshListView();
+
                         Toast.makeText(getBaseContext(), "Reminder removed.", Toast.LENGTH_SHORT).show();
 
                     }
@@ -97,8 +111,24 @@ public class MainViewListActivity extends AppCompatActivity {
 
             }
         });
-    */
 
+        reminderListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> av, View v, int i, long l) {
+                        Reminder result = (Reminder)
+                                reminderListView.getAdapter().getItem(i);
+
+                        Intent intent = new Intent(MainViewListActivity.this, ViewDetailedReminderActivity.class);
+                        intent.putExtra("detailedReminder", result);
+                        startActivityForResult(intent, EDIT_REQUEST);
+                        finish();
+                    }
+                }
+        );
+
+        refreshListView();
     }
 
     public void onFABClick(View v) {
@@ -136,9 +166,11 @@ public class MainViewListActivity extends AppCompatActivity {
 
                 } else {
                     Collections.sort(reminders);
-                    isSorted = true;
                     sort = "Ascending order";
                 }
+
+                isSorted = !isSorted;
+
                 toastHelper = Toast.makeText(getApplicationContext(), sort, Toast.LENGTH_SHORT);
                 toastHelper.show();
 
@@ -220,7 +252,7 @@ public class MainViewListActivity extends AppCompatActivity {
                 }
                 break;
 
-            case MARK_COMPLETE_REQUEST:
+            case EDIT_REQUEST:
                 if (resultCode == RESULT_OK) {
 
 
@@ -258,10 +290,12 @@ public class MainViewListActivity extends AppCompatActivity {
 
     public void populateDummyData(int size) {
         for (int i = 0; i < size; i++) {
-            dbHelper.addReminder(new Reminder
+            Reminder r = new Reminder
                     ((long) i, (Integer.toString((i + 1000)))
-                    , "almost there mate and then the best thing in the world is the grae t nasinf jkelna"
-                    , ("02/01/" + (3000 + i)), true));
+                            , "almost there mate and then the best thing in the world is the grae t nasinf jkelna"
+                            , ("02/01/" + (3000 + i)), true);
+            dbHelper.addReminder(r);
+            reminders.add(r);
 
         }
     }
