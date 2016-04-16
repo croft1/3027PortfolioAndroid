@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="croft.todo.NameGenerator.NameViewActivity">
+    tools:context="croft.portfolio.NameGenerator.NameViewActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,9 +42,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="of planet"
         android:id="@+id/textView2"
-        android:layout_marginBottom="54dp"
-        android:layout_above="@+id/planetNameLabel"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/firstNameLabel"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +53,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Planet Name"
         android:id="@+id/planetNameLabel"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="HELLO"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

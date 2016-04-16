@@ -36,8 +36,7 @@
         android:layout_below="@+id/titleLabel"
         android:layout_alignLeft="@+id/titleLabel"
         android:layout_alignStart="@+id/titleLabel"
-        android:layout_toLeftOf="@+id/viewCompleteCheck"
-        android:layout_toStartOf="@+id/viewCompleteCheck" />
+        android:layout_alignRight="@+id/viewDate" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,19 +50,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <CheckBox
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/viewCompleteCheck"
-        android:checked="false"
-        android:clickable="false"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Not Complete"
+        android:id="@+id/completeText"
+        android:textColor="#d24e4e"
         android:layout_alignTop="@+id/descriptionLabel"
         android:layout_alignRight="@+id/viewDate"
-        android:layout_alignEnd="@+id/viewDate"
-
-        android:text="Complete?"
-        android:textColor="@color/colorPrimaryDark" />
-
+        android:layout_alignEnd="@+id/viewDate" />
 
 
 </RelativeLayout>

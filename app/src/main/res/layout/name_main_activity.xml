@@ -16,48 +16,53 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/generateButton"
-        android:layout_alignStart="@+id/generateButton" />
+        android:hint="First Name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/inputLastName"
+        android:hint="Last Name"
         android:layout_below="@+id/inputFirstName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/generateButton"
-        android:layout_alignStart="@+id/generateButton" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/inputMaiden"
+        android:hint="Mothers Maiden Name"
         android:layout_below="@+id/inputLastName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/generateButton"
-        android:layout_alignStart="@+id/generateButton" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/inputBirth"
+        android:hint="Birthplace"
         android:layout_below="@+id/inputMaiden"
         android:layout_alignRight="@+id/inputMaiden"
         android:layout_alignEnd="@+id/inputMaiden"
-        android:layout_alignLeft="@+id/generateButton"
-        android:layout_alignStart="@+id/generateButton" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/inputBrand"
+        android:hint="Favourite Brand"
         android:layout_below="@+id/inputBirth"
         android:layout_alignRight="@+id/inputBirth"
         android:layout_alignEnd="@+id/inputBirth"
-        android:layout_alignLeft="@+id/generateButton"
-        android:layout_alignStart="@+id/generateButton" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -69,53 +74,4 @@
         android:layout_marginTop="83dp"
         android:onClick="generateButtonClicked" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="First Name"
-        android:id="@+id/textView"
-        android:layout_alignTop="@+id/inputFirstName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lst Name"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/inputFirstName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Maiden Name"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/inputLastName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Birthplace"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/inputMaiden"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Fave Brand"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/inputBirth"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 </RelativeLayout>

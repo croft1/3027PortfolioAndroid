@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="croft.todo.CalculatorMain">
+    tools:context="croft.portfolio.CalculatorMain">
 
     <EditText
         android:layout_width="wrap_content"
@@ -103,7 +103,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/resultDisplayer"
-        android:text="=="
         android:textAlignment="center"
         android:textSize="40dp"
         android:layout_below="@+id/secondNumView"
@@ -118,7 +117,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/selOperView"
         android:textColor="@color/colorAccent"
-        android:text="++"
         android:layout_below="@+id/firstNumView"
         android:layout_alignRight="@+id/resultDisplayer"
         android:layout_alignEnd="@+id/resultDisplayer"
@@ -133,7 +131,6 @@
         android:id="@+id/firstNumView"
         android:textColor="@android:color/holo_blue_bright"
         android:layout_marginTop="44dp"
-        android:text="++"
         android:layout_below="@+id/secondNumberInput"
         android:layout_alignRight="@+id/resultDisplayer"
         android:layout_alignEnd="@+id/resultDisplayer"
@@ -147,7 +144,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/secondNumView"
         android:textColor="@android:color/holo_blue_bright"
-        android:text="++"
         android:layout_below="@+id/selOperView"
         android:layout_alignRight="@+id/resultDisplayer"
         android:layout_alignEnd="@+id/resultDisplayer"

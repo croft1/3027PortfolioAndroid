@@ -3,25 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BasicReminder.BasicViewListActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:fillViewport="true">
+    tools:context=".BasicReminder.BasicViewListActivity"
+    android:clickable="true">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView"
+            android:fillViewport="true">
 
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/todoList"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/FAB"
-            android:nestedScrollingEnabled="false" />
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/reminderList"
+                android:nestedScrollingEnabled="false"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:listSelector="@color/button_material_dark"
+                android:focusable="false"
+                />
+        </ScrollView>
 
-    </ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,16 +40,22 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-<!--
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:nestedScrollingEnabled="false"
-        android:onClick="updateList" />
--->
+    <!--
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:nestedScrollingEnabled="false"
+            android:onClick="updateList" />
+
+
+            <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+    -->
 
 </RelativeLayout>
