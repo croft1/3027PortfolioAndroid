@@ -37,6 +37,7 @@ public class MainViewListActivity extends AppCompatActivity {
     private static ArrayList<Reminder> reminders = new ArrayList<>();
     private static boolean isSorted;
     private DatabaseHelper dbHelper;
+    private Toast currentToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,11 @@ public class MainViewListActivity extends AppCompatActivity {
         setContentView(R.layout.reminder_main_activity);
 
         dbHelper = new DatabaseHelper(getApplicationContext());
-
+        if (dbHelper.getAllReminders().size() != 0) {
+            ArrayList<Reminder> convertList = new ArrayList<>(dbHelper.getAllReminders().values());
+            reminders = convertList;
+        }
         reminderListView = (ListView) findViewById(R.id.reminderList);
-
         adapter = new ReminderAdapter(this, reminders);
 
 
@@ -55,27 +58,18 @@ public class MainViewListActivity extends AppCompatActivity {
         reminderListView.setSelector(android.R.color.holo_blue_light);
         reminderListView.setAdapter(adapter);
 
-        //if (dbHelper.getAllReminders().size() == 0){
-            //populateDummyData(3);
-
-        //}else{
-            ArrayList<Reminder> convertList = new ArrayList<>(dbHelper.getAllReminders().values());
-            reminders = convertList;
-       // }
-
-        refreshListView();
+        //refreshListView();
 
         reminderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int pos, long id) {
-                Toast.makeText(MainViewListActivity.this, "Index clicked: " + String.valueOf(pos),Toast.LENGTH_SHORT).show();
-                Reminder result = (Reminder)
-                        reminderListView.getAdapter().getItem(pos);
+
+                Reminder result = (Reminder) reminderListView.getAdapter().getItem(pos);
 
                 Intent intent = new Intent(MainViewListActivity.this, ViewDetailedReminderActivity.class);
                 intent.putExtra(EDIT_REMINDER_INTENT, result);
                 startActivityForResult(intent, EDIT_REQUEST);
-                finish();
+
             }
         });
 
@@ -125,6 +119,7 @@ public class MainViewListActivity extends AppCompatActivity {
     public void onFABClick(View v) {
         Intent intent = new Intent(MainViewListActivity.this, AddReminderActivity.class);
         startActivityForResult(intent, ADD_REQUEST);
+        overridePendingTransition(0, 0);
         //finish();             want to be able to return if user presses back
     }
 
@@ -145,8 +140,10 @@ public class MainViewListActivity extends AppCompatActivity {
 
                 String sort;
 
+
+
                 if (reminders.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Can't sort without reminders!", Toast.LENGTH_SHORT).show();
+                    pushToast("Can't sort without reminders!");
                     return false;
                 }
 
@@ -160,14 +157,18 @@ public class MainViewListActivity extends AppCompatActivity {
 
                 isSorted = !isSorted;
 
-                Toast.makeText(getApplicationContext(), sort, Toast.LENGTH_SHORT).show();
+                pushToast(sort);
+                refreshListView();
 
 
                 //without notifyDataSetChanged, the screen only updates if list items are out of view...
 
+                /*
                 Intent update = new Intent(this, MainViewListActivity.class);
                 this.finish();
                 startActivity(update);
+*/
+
                 return true;
 
             case R.id.clear_reminders:
@@ -176,9 +177,11 @@ public class MainViewListActivity extends AppCompatActivity {
                     dbHelper.removeReminder(toDelete);
                 }
                 reminders.clear();
-                Intent clear = new Intent(this, MainViewListActivity.class);
-                this.finish();
-                startActivity(clear);
+
+                refreshListView();
+//                Intent clear = new Intent(this, MainViewListActivity.class);
+//                this.finish();
+//                startActivity(clear);
 
 
                 return true;
@@ -189,14 +192,16 @@ public class MainViewListActivity extends AppCompatActivity {
 
                 Intent i = new Intent(this, MainViewListActivity.class);
                 isSorted = false;
+
                 refreshListView();
-                this.finish();
-                startActivity(i);
+
+//                refreshListView();
+//                this.finish();
+//                startActivity(i);
                 return true;
 
             default:
-                Toast.makeText(getApplicationContext(), "A Petty Failure", Toast.LENGTH_LONG).show();
-
+                pushToast("A Petty Failure");
         }
         return super.onOptionsItemSelected((item));
     }
@@ -216,10 +221,9 @@ public class MainViewListActivity extends AppCompatActivity {
                     Reminder r = data.getParcelableExtra(ADD_REMINDER_INTENT);
 
                     for (Reminder existing : reminders) {
-                        if (r.getId() == existing.getId()) {
-                            Toast.makeText(MainViewListActivity.this,
-                                    "I don't think you were intending on adding a duplicate reminder",
-                                    Toast.LENGTH_SHORT).show();
+                        if (r.getId() == existing.getId() || r.getTitle() == existing.getTitle()) {
+                            pushToast("I don't think you were intending on adding a duplicate reminder");
+                            currentToast.show();
                             canAdd = false;
                         }
                     }
@@ -230,12 +234,12 @@ public class MainViewListActivity extends AppCompatActivity {
                         refreshListView();
                     }
 
-                    Toast.makeText(getApplicationContext(), "Reminder added", Toast.LENGTH_SHORT).show();
-
+                    pushToast("Reminder added");
                     //an intent to itself to restart activity, which refreshes list
-                    Intent update = new Intent(this, MainViewListActivity.class);
-                    this.finish();
-                    startActivity(update);
+                    refreshListView();
+//                    Intent update = new Intent(this, MainViewListActivity.class);
+//                    this.finish();
+//                    startActivity(update);
                 }
                 break;
 
@@ -266,15 +270,14 @@ public class MainViewListActivity extends AppCompatActivity {
 
 
                     adapter.notifyDataSetChanged();
-                    Intent update = new Intent(MainViewListActivity.this, MainViewListActivity.class);
-
-                    this.finish();
-                    startActivity(update);
+//                    Intent update = new Intent(MainViewListActivity.this, MainViewListActivity.class);
+//
+//                    this.finish();
+//                    startActivity(update);
                 }
                 break;
             default:
-                Toast.makeText(getApplicationContext(), "FAILED", Toast.LENGTH_SHORT).show();
-
+                pushToast("FAILED");
         }
     }
 
@@ -306,8 +309,17 @@ public class MainViewListActivity extends AppCompatActivity {
     }
 
     private void refreshListView() {
-        // Update ListView and monster count
+        // Update reminderListView
         adapter.notifyDataSetChanged();
 
+    }
+
+    private void pushToast(String message) {
+        //toast is null when it isn't on screen. currentToast will only be != null when its shown
+        if (currentToast != null){
+            currentToast.cancel();
+        }
+        currentToast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        currentToast.show();
     }
 }

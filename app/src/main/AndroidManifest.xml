@@ -25,7 +25,7 @@
         <activity android:name="croft.portfolio.BasicReminder.BasicViewListActivity" />
         <activity android:name="croft.portfolio.BasicReminder.BasicAddReminderActivity" />
         <activity android:name="croft.portfolio.BasicReminder.BasicViewDetailedReminderActivity" />
-        <activity android:name="croft.portfolio.PersistentReminder.AddReminderActivity" />
+        <activity android:name="croft.portfolio.PersistentReminder.AddReminderActivity"/>
         <activity android:name="croft.portfolio.PersistentReminder.ViewDetailedReminderActivity" />
         <activity android:name=".PersistentReminder.MainViewListActivity" />
 

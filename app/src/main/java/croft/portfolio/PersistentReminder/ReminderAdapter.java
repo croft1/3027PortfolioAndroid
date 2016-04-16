@@ -89,9 +89,11 @@ public class ReminderAdapter extends BaseAdapter {
             vh.complete.setTextColor(Color.RED);
         }
 
+        //the bane of my entire existance. Added since list index clicking wasnt working
+        // Caused notifiy data set to stop working and so much dead time
 
-        view.setClickable(true);
-        view.setFocusable(true);
+        //view.setClickable(true);
+        //view.setFocusable(true);
 
         return view;
     }

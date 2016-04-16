@@ -31,6 +31,7 @@ public class AddReminderActivity extends AppCompatActivity {
     private EditText inputDescription;
     private Button calendarDialogButton;
     static Calendar calendar = Calendar.getInstance();
+    public static final int TEXT_LENGTH_LIMIT = 200;
 
 
     @Override
@@ -72,7 +73,17 @@ public class AddReminderActivity extends AppCompatActivity {
                     inputDate.getText().toString() != "Press to choose date" &&
                     inputDescription.getText().toString().length() > 0) {
                 addReminder.setEnabled(true);
-                addReminder.setHighlightColor(Color.CYAN);
+                addReminder.setBackgroundColor(Color.CYAN);
+            }
+            if(inputDescription.getText().toString().length() > TEXT_LENGTH_LIMIT ||
+                    inputTitle.getText().toString().length() > (TEXT_LENGTH_LIMIT/4)){
+                addReminder.setEnabled(false);
+                addReminder.setBackgroundColor(Color.LTGRAY);
+                inputDescription.clearFocus();
+                inputTitle.clearFocus();        //clearing desc focus moves to next focusable
+
+                Toast.makeText(getApplicationContext(), "Description limit reached", Toast.LENGTH_SHORT);
+
             }
         }
 

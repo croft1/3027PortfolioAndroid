@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/inputTitle"
+        android:singleLine="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -27,6 +28,7 @@
         android:ems="10"
         android:id="@+id/inputDescription"
         android:hint="Description"
+        android:maxLines="4"
         android:layout_marginTop="129dp"
         android:layout_below="@+id/inputTitle"
         android:layout_alignRight="@+id/inputDate"
@@ -40,8 +42,9 @@
         android:text="Add Reminder"
         android:id="@+id/addReminderButton"
         android:onClick="onClick"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/inputDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="143dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

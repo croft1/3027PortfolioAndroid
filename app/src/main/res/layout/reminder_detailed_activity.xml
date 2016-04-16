@@ -15,9 +15,9 @@
         android:id="@+id/completeCheck"
         android:checked="false"
         android:text="Mark as complete"
-        android:layout_marginBottom="76dp"
-        android:layout_above="@+id/saveButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/editDescriptionField"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -42,7 +42,6 @@
         android:layout_marginTop="82dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/completeCheck"
         android:layout_below="@+id/editTitleField" />
 
     <EditText
