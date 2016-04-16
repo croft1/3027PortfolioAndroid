@@ -25,13 +25,13 @@ public class BasicViewDetailedReminderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        setContentView(R.layout.reminder_detailed_activity);
+        setContentView(R.layout.basic_reminder_detailed_activity);
 
         titleLabel = (TextView) findViewById(R.id.titleLabel);
         descriptionLabel = (TextView) findViewById(R.id.descriptionLabel);
         dateLabel = (TextView) findViewById(R.id.dateLabel);
-        completeCheckBox = (CheckBox) findViewById(R.id.completeCheckBox);
-        save = (Button) findViewById(R.id.saveButton);
+        completeCheckBox = (CheckBox) findViewById(R.id.compCheck);
+        save = (Button) findViewById(R.id.saveB);
 
         Intent i = getIntent();
         currentBasicReminder = i.getParcelableExtra("detailedReminder");
@@ -50,7 +50,7 @@ public class BasicViewDetailedReminderActivity extends AppCompatActivity {
         //TODO don't know how to get complete to update in previous list
 
         switch (v.getId()) {
-            case R.id.saveButton:
+            case R.id.saveB:
                 currentBasicReminder.setComplete(!currentBasicReminder.isComplete());
                 //TODO edit text fields in detailed reminder
                 Intent i = new Intent(this, BasicViewListActivity.class);
@@ -60,8 +60,6 @@ public class BasicViewDetailedReminderActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
                 break;
-
-            case android.R.id.home:
 
         }
     }

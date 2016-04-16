@@ -98,7 +98,7 @@ public class AddReminderActivity extends AppCompatActivity {
 
 
                 Intent i = new Intent(this, MainViewListActivity.class);
-                i.putExtra("reminder", submittedReminder);
+                i.putExtra(MainViewListActivity.ADD_REMINDER_INTENT, submittedReminder);
                 //MainViewListActivity.addReminder(submittedReminder);
 
                 //startActivity(i);
@@ -129,8 +129,8 @@ public class AddReminderActivity extends AppCompatActivity {
                     }
                 };
 
-                new DatePickerDialog(AddReminderActivity.this, date, calendar
-                        .get(Calendar.YEAR),
+                new DatePickerDialog(AddReminderActivity.this, date,
+                        calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
 

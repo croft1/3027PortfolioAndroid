@@ -30,7 +30,6 @@ public class BasicViewListActivity extends AppCompatActivity {
     private BasicReminderItemAdapter adapter;
     private static ArrayList<BasicReminder> basicReminders = new ArrayList<BasicReminder>();
     private TextView complete;
-    private Toast toastHelper;
     private static boolean isSorted;
     //private Item or Menu sortButton;
     private static int selectedIndex;
@@ -44,12 +43,11 @@ public class BasicViewListActivity extends AppCompatActivity {
         setContentView(R.layout.reminder_main_activity);
 
         reminderListView = (ListView) findViewById(R.id.reminderList);
-        complete = (TextView) findViewById(R.id.completeText);
 
         //sortButton = (Menu) findViewById(R.id.action_sort);
 
-
         adapter = new BasicReminderItemAdapter(this, basicReminders);
+
         reminderListView.setChoiceMode(reminderListView.CHOICE_MODE_SINGLE);
         reminderListView.setSelector(android.R.color.holo_blue_light);
         reminderListView.setAdapter(adapter);
@@ -93,12 +91,11 @@ public class BasicViewListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_sort:
-                //go to addMonsterActivity and await result
 
                 String sort;
 
                 if (basicReminders.isEmpty()) {
-                    toastHelper = Toast.makeText(getApplicationContext(), "Can't sort without basicReminders!", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Can't sort without basicReminders!", Toast.LENGTH_SHORT).show();
                     return false;
                 }
 
@@ -112,8 +109,7 @@ public class BasicViewListActivity extends AppCompatActivity {
 
                 isSorted = !isSorted;
 
-                toastHelper = Toast.makeText(getApplicationContext(), sort, Toast.LENGTH_SHORT);
-                toastHelper.show();
+                Toast.makeText(getApplicationContext(), sort, Toast.LENGTH_SHORT).show();
 
                 //without notifyDataSetChanged, the screen only updates if list items are out of view...
 
@@ -143,8 +139,8 @@ public class BasicViewListActivity extends AppCompatActivity {
                 return true;
 
             default:
-                toastHelper = Toast.makeText(getApplicationContext(), "A Petty Failure", Toast.LENGTH_LONG);
-                toastHelper.show();
+                Toast.makeText(getApplicationContext(), "A Petty Failure", Toast.LENGTH_LONG).show();
+
         }
         return super.onOptionsItemSelected((item));
     }
@@ -187,7 +183,7 @@ public class BasicViewListActivity extends AppCompatActivity {
                 }
                 break;
             default:
-                toastHelper = Toast.makeText(getApplicationContext(), "FAILED", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "FAILED", Toast.LENGTH_SHORT).show();
 
         }
     }

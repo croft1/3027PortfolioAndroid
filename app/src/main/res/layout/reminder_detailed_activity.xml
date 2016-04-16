@@ -9,45 +9,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BasicReminder.BasicViewDetailedReminderActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Reminder Title"
-        android:id="@+id/titleLabel"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/completeCheckBox"
-        android:layout_alignEnd="@+id/completeCheckBox" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Description"
-        android:lines="10"
-        android:ellipsize="end"
-        android:id="@+id/descriptionLabel"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/dateLabel"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="DATE DUE"
-        android:id="@+id/dateLabel"
-        android:layout_below="@+id/titleLabel"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp" />
-
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/completeCheckBox"
+        android:id="@+id/completeCheck"
         android:checked="false"
         android:text="Mark as complete"
-        android:layout_below="@+id/descriptionLabel"
+        android:layout_marginBottom="76dp"
+        android:layout_above="@+id/saveButton"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -55,8 +24,62 @@
         android:layout_height="wrap_content"
         android:text="SAVE"
         android:id="@+id/saveButton"
+        android:onClick="onClick"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClick" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="66dp"
+        android:layout_marginStart="66dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editDescriptionField"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="82dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/completeCheck"
+        android:layout_below="@+id/editTitleField" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTitleField"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/editDescriptionField"
+        android:layout_alignEnd="@+id/editDescriptionField"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editDateButton"
+        android:onClick="onClick"
+        android:layout_marginTop="20dp"
+        android:hint="Press To Choose Date"
+        android:layout_below="@+id/editTitleField"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE"
+        android:id="@+id/deleteReminder"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/editDescriptionField"
+        android:layout_alignEnd="@+id/editDescriptionField"
+        android:layout_marginRight="51dp"
+        android:layout_marginEnd="51dp"
+        android:textColor="#a80f0f"
+        android:transitionName="@android:string/ok" />
 
 </RelativeLayout>
