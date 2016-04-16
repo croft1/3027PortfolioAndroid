@@ -1,4 +1,5 @@
-package croft.todo.ReminderApplication;
+package croft.todo.PersistentReminder;
+
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -17,10 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import croft.todo.BasicReminder.ViewListActivity;
+import croft.todo.BasicReminder.models.Reminder;
 import croft.todo.R;
+import croft.todo.PersistentReminder.models.*;
 
-
-public class addReminderActivity extends AppCompatActivity {
+public class AddReminderActivity extends AppCompatActivity {
 
 
     private Button addReminder;
@@ -129,7 +132,7 @@ public class addReminderActivity extends AppCompatActivity {
                     }
                 };
 
-                new DatePickerDialog(addReminderActivity.this, date, calendar
+                new DatePickerDialog(AddReminderActivity.this, date, calendar
                         .get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();

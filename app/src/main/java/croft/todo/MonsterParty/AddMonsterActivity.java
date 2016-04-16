@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import croft.todo.MonsterParty.models.Monster;
 import croft.todo.R;
 
 /**
@@ -24,10 +25,10 @@ public class AddMonsterActivity extends AppCompatActivity {
 
         monsterAddList = (ListView) findViewById(R.id.monsterListView);
 
-        ArrayList<Monster> monsters = new ArrayList < Monster>();
-        monsters.add(new Monster("Fairy", "Good", 1, 90));
-        monsters.add(new Monster("Druid", "Neutral", 1, 105));
-        monsters.add(new Monster("Devil", "Evil", 1, 110));
+        //create dapter and populate
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+        ArrayList<Monster> monsters = new
+                ArrayList<>(dbHelper.getAllMonsters().values());
 
         MonsterAdapter adapter = new MonsterAdapter(this, monsters);
         monsterAddList.setAdapter(adapter);

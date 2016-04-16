@@ -1,4 +1,4 @@
-package croft.todo.ReminderApplication;
+package croft.todo.BasicReminder.models;
 
 import android.annotation.TargetApi;
 import android.os.Parcel;
@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by Michaels on 26/3/2016.
  */
-public class Reminder implements Parcelable, Comparable<Reminder>{
+public class Reminder implements Parcelable, Comparable<BasicReminder>{
 
 
 
@@ -23,7 +23,7 @@ public class Reminder implements Parcelable, Comparable<Reminder>{
     public static int totalIncomplete = 0;
 
     @TargetApi(19)      //not available to target API 14 we're running
-    public int compareTo(Reminder other){
+    public int compareTo(BasicReminder other){
         if (getDueDate() == null || other.getDueDate() == null)
             return 0;
         return getDueDate().compareTo(other.getDueDate());
@@ -46,7 +46,7 @@ public class Reminder implements Parcelable, Comparable<Reminder>{
             setDueDate(d);
         } catch (ParseException e) {
             e.printStackTrace();
-            System.err.println("Reminder date input was in the wrong format");
+            System.err.println("BasicReminder date input was in the wrong format");
 
             d = new Date((long) 0);
         }
@@ -75,14 +75,14 @@ public class Reminder implements Parcelable, Comparable<Reminder>{
     }
 
 
-    public static final Creator<Reminder> CREATOR = new Creator<Reminder>() {
+    public static final Creator<BasicReminder> CREATOR = new Creator<BasicReminder>() {
         @Override
-        public Reminder createFromParcel(Parcel in) {
-            return new Reminder(in);
+        public BasicReminder createFromParcel(Parcel in) {
+            return new BasicReminder(in);
         }
         @Override
-        public Reminder[] newArray(int size) {
-            return new Reminder[size];
+        public BasicReminder[] newArray(int size) {
+            return new BasicReminder[size];
         }
     };
 

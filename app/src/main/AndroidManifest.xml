@@ -16,14 +16,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ReminderApplication.ViewListActivity" />
-        <activity android:name=".ReminderApplication.addReminderActivity" />
+        <activity android:name=".BasicReminder.BasicViewListActivity" />
+        <activity android:name=".BasicReminder.BasicAddReminderActivity" />
         <activity android:name=".NameGenerator.NameGenMain" />
         <activity android:name=".NameGenerator.NameViewActivity" />
         <activity android:name=".Calculator.CalculatorMain" />
         <activity android:name=".MonsterParty.MonsterMain" />
         <activity android:name=".MonsterParty.AddMonsterActivity" />
-        <activity android:name=".ReminderApplication.ViewDetailedReminderActivity" />
+        <activity android:name=".BasicReminder.BasicViewDetailedReminderActivity" />
 
 
     </application>

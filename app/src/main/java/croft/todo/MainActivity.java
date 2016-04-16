@@ -9,7 +9,7 @@ import android.widget.Toast;
 import croft.todo.Calculator.CalculatorMain;
 import croft.todo.MonsterParty.MonsterMain;
 import croft.todo.NameGenerator.NameGenMain;
-import croft.todo.ReminderApplication.ViewListActivity;
+import croft.todo.BasicReminder.BasicViewListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
             case R.id.tute4Button:
-                i = new Intent(MainActivity.this, ViewListActivity.class);
+                i = new Intent(MainActivity.this, BasicViewListActivity.class);
                 startActivity(i);
                 break;
             case R.id.tute4ButtonRecycler:

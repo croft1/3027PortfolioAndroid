@@ -1,4 +1,4 @@
-package croft.todo.ReminderApplication;
+package croft.todo.BasicReminder;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import croft.todo.R;
+import croft.todo.BasicReminder.models.BasicReminder;
 
 public class ViewDetailedReminderActivity extends AppCompatActivity {
     private TextView titleLabel;
     private TextView descriptionLabel;
     private TextView dateLabel;
     private CheckBox completeCheckBox;
-    private Reminder currentReminder;
+    private BasicReminder currentBasicReminder;
     private Button save;
 
     @Override
@@ -33,28 +34,28 @@ public class ViewDetailedReminderActivity extends AppCompatActivity {
         save = (Button) findViewById(R.id.saveButton);
 
         Intent i = getIntent();
-        currentReminder = i.getParcelableExtra("reminder");
+        currentBasicReminder = i.getParcelableExtra("reminder");
 
-        setTitle(currentReminder.getTitle());
-        titleLabel.setText(currentReminder.getTitle());
-        descriptionLabel.setText(currentReminder.getDescription());
-        dateLabel.setText(currentReminder.getDueDateString());
+        setTitle(currentBasicReminder.getTitle());
+        titleLabel.setText(currentBasicReminder.getTitle());
+        descriptionLabel.setText(currentBasicReminder.getDescription());
+        dateLabel.setText(currentBasicReminder.getDueDateString());
 
-        completeCheckBox.setChecked(currentReminder.isComplete());
+        completeCheckBox.setChecked(currentBasicReminder.isComplete());
     }
 
     public void onClick(View v) {
-        //ViewListActivity listActivity = new ViewListActivity();
+        //BasicViewListActivity listActivity = new BasicViewListActivity();
         // v.getReminderList().setComplete(completeCheckBox.isChecked());
         //TODO don't know how to get complete to update in previous list
 
         switch (v.getId()) {
             case R.id.saveButton:
-                currentReminder.setComplete(!currentReminder.isComplete());
+                currentBasicReminder.setComplete(!currentBasicReminder.isComplete());
                 //TODO edit text fields in detailed reminder
-                Intent i = new Intent(this, ViewListActivity.class);
-                i.putExtra("reminder", currentReminder);
-                Toast.makeText(getApplicationContext(), "Reminder Complete?  " + currentReminder.isComplete(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, BasicViewListActivity.class);
+                i.putExtra("reminder", currentBasicReminder);
+                Toast.makeText(getApplicationContext(), "BasicReminder Complete?  " + currentBasicReminder.isComplete(), Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 startActivity(i);
                 finish();

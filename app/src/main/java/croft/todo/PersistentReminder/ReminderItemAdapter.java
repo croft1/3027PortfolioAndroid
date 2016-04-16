@@ -1,4 +1,4 @@
-package croft.todo.ReminderApplication;
+package croft.todo.BasicReminder;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,20 +11,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Date;
 
+import croft.todo.BasicReminder.models.BasicReminder;
 import croft.todo.R;
 
 /**
  * Created by Michaels on 12/4/2016.
  */
-public class ToDoItemAdapter extends BaseAdapter {
+public class ReminderItemAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Reminder> reminders;
+    private ArrayList<BasicReminder> basicReminders;
     private int count;  //for adding count at the bottom
 
-    public ToDoItemAdapter(Context context, ArrayList<Reminder> reminders) {
+    public ReminderItemAdapter(Context context, ArrayList<BasicReminder> basicReminders) {
         this.context = context;
-        this.reminders = reminders;
+        this.basicReminders = basicReminders;
     }
 
     public static class ViewHolder {
@@ -35,11 +36,11 @@ public class ToDoItemAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return reminders.size();
+        return basicReminders.size();
     }
 
-    public Reminder getItem(int i) {
-        return reminders.get(i);
+    public BasicReminder getItem(int i) {
+        return basicReminders.get(i);
     }
 
     public long getItemId(int i) {
@@ -66,14 +67,14 @@ public class ToDoItemAdapter extends BaseAdapter {
             vh = (ViewHolder) view.getTag();
         }
 
-        String title = reminders.get(i).getTitle();
-        String description = reminders.get(i).getDescription();
-        Date dueDate = reminders.get(i).getDueDate();
-        Boolean completed = reminders.get(i).isComplete();
+        String title = basicReminders.get(i).getTitle();
+        String description = basicReminders.get(i).getDescription();
+        Date dueDate = basicReminders.get(i).getDueDate();
+        Boolean completed = basicReminders.get(i).isComplete();
 
         vh.title.setText(title);
         vh.description.setText(description);
-        vh.date.setText(reminders.get(i).getDueDateString());
+        vh.date.setText(basicReminders.get(i).getDueDateString());
         vh.completed.setChecked(completed);
 
         return view;
