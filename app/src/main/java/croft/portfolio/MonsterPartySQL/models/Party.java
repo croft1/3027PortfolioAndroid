@@ -1,4 +1,4 @@
-package croft.portfolio.MonsterParty.models;
+package croft.portfolio.MonsterPartySQL.models;
 
 /**
  * Created by Michaels on 16/4/2016.

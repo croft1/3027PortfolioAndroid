@@ -1,4 +1,4 @@
-package croft.portfolio.MonsterParty;
+package croft.portfolio.MonsterPartySQL;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import croft.portfolio.MonsterParty.models.Monster;
-import croft.portfolio.MonsterParty.models.MonsterParty;
-import croft.portfolio.MonsterParty.models.Party;
+import croft.portfolio.MonsterPartySQL.models.Monster;
+import croft.portfolio.MonsterPartySQL.models.MonsterParty;
+import croft.portfolio.MonsterPartySQL.models.Party;
 
 /**
  * Created by Michaels on 16/4/2016.
  */
-public class MonsterDatabaseHelper extends SQLiteOpenHelper {
+public class SQLDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "MonsterDB";
     public static final int DATABASE_VERSION = 1;
 
-    public MonsterDatabaseHelper(Context context){
+    public SQLDatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

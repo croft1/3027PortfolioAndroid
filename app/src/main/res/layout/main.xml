@@ -14,7 +14,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tute 4: View List"
+        android:text="3: View List"
         android:id="@+id/tute4Button"
         android:onClick="onClick"
         android:layout_below="@+id/tute3Button"
@@ -26,7 +26,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tute 3: Star Wars Name Generator"
+        android:text="2: Star Wars Name Generator"
         android:id="@+id/tute3Button"
         android:onClick="onClick"
         android:layout_below="@+id/tute2Button"
@@ -38,7 +38,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tute 2: Calculator"
+        android:text="1: Calculator"
         android:id="@+id/tute2Button"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/tute3Button"
@@ -57,12 +57,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/tute4Button"
         android:layout_alignEnd="@+id/tute4Button"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+        android:enabled="false" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tute 5: List with SQL"
+        android:text="4: List with SQL"
         android:id="@+id/tute5Button"
         android:onClick="onClick"
         android:nestedScrollingEnabled="false"
@@ -75,12 +76,40 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TUTE 5 Supplementary: Monster Party + SQLlite"
+        android:text="TUTE 5 Supp: Monsters + SQLlite"
         android:id="@+id/tute5SuppButton"
         android:nestedScrollingEnabled="false"
         android:onClick="onClick"
         android:layout_below="@+id/tute4ButtonRecycler"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:enabled="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TUTE 6 SUPP: MONSTERS + HTTPJSON REQUESTS"
+        android:id="@+id/tute6SuppButton"
+        android:layout_below="@+id/tute5Button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onClick"
+        android:enabled="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5: ABC NEWS READER"
+        android:id="@+id/tute6Button"
+        android:layout_below="@+id/tute6SuppButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tute6SuppButton"
+        android:layout_alignEnd="@+id/tute6SuppButton"
+        android:onClick="onClick" />
 
 </RelativeLayout>

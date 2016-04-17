@@ -6,11 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import croft.portfolio.MonsterParty.models.Monster;
 import croft.portfolio.PersistentReminder.models.Reminder;
 
 /**
@@ -20,6 +18,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String DATABASE_NAME = "ReminderDB";
     public static final int DATABASE_VERSION = 1;
+
+
+    public static final int REMINDER_ID = 0;
+    public static final int REMINDER_TITLE = 1;
+    public static final int REMINDER_DESC = 2;
+    public static final int REMINDER_DATE = 3;
+    public static final int REMINDER_COMPLETION = 4;
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -64,19 +69,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
             do {
                 boolean retrieved = false;
-                if(cursor.getInt(4) == 0)
-                    retrieved = true;
 
-                Reminder r = new Reminder(cursor.getLong(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
+                if(cursor.getInt(REMINDER_COMPLETION) == 0)  //cleaner to convert to bool here than in constructor
+                    retrieved = false;  // 1 true, 0 false to boolean
+
+                Reminder r = new Reminder(cursor.getLong(REMINDER_ID),
+                        cursor.getString(REMINDER_TITLE),
+                        cursor.getString(REMINDER_DESC),
+                        cursor.getString(REMINDER_DATE),
                         retrieved);
 
                 reminders.put(r.getId(), r);
             } while (cursor.moveToNext());
         }
 
+        db.close();
         cursor.close();
         return reminders;
     }

@@ -79,6 +79,7 @@
         android:layout_marginRight="51dp"
         android:layout_marginEnd="51dp"
         android:textColor="#a80f0f"
-        android:transitionName="@android:string/ok" />
+        android:transitionName="@android:string/ok"
+        android:onClick="onClick" />
 
 </RelativeLayout>

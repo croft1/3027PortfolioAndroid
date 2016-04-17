@@ -6,18 +6,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+
 import croft.portfolio.Calculator.CalculatorMain;
+import croft.portfolio.MonsterPartySQL.SQLMonsterMain;
 import croft.portfolio.NameGenerator.NameGenMain;
 import croft.portfolio.BasicReminder.BasicViewListActivity;
+import croft.portfolio.NewsReader.NewsFullArticleActivity;
+import croft.portfolio.NewsReader.NewsMain;
 import croft.portfolio.PersistentReminder.MainViewListActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("FIT3027 - Portfolio Activities");
-        setContentView(R.layout.portfolio_main);
+        setContentView(R.layout.main);
+
+
     }
 
     public void onClick(View v){
@@ -39,16 +47,20 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Available soon!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tute5SuppButton:
-                i = new Intent(MainActivity.this, BasicViewListActivity.class);
+                i = new Intent(MainActivity.this, SQLMonsterMain.class);
                 startActivity(i);
                 break;
             case R.id.tute5Button:
                 i = new Intent(this, MainViewListActivity.class);
                 startActivity(i);
                 break;
+            case R.id.tute6Button:
+                //i = new Intent(this, NewsMain.class);
+                i = new Intent(this, NewsFullArticleActivity.class);
+                startActivity(i);
+                break;
             default:
                 Toast.makeText(this, "Button has not been assigned an action", Toast.LENGTH_SHORT).show();
-
         }
     }
 }

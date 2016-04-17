@@ -1,4 +1,4 @@
-package croft.portfolio.MonsterParty;
+package croft.portfolio.MonsterPartySQL;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,19 +15,19 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import croft.portfolio.MonsterParty.models.Monster;
-import croft.portfolio.MonsterParty.models.Party;
+import croft.portfolio.MonsterPartySQL.models.Monster;
+import croft.portfolio.MonsterPartySQL.models.Party;
 import croft.portfolio.R;
 
-public class MonsterMain extends AppCompatActivity {
+public class SQLMonsterMain extends AppCompatActivity {
 
     public static final int ADD_MONSTER_REQUEST = 1;
 
     private ListView partyList;
-    private MonsterAdapter adapter;
+    private SQLMonsterAdapter adapter;
     private ArrayList<Monster> partyMonsters;
     private Party defaultParty;
-    private MonsterDatabaseHelper dbHelper;
+    private SQLDatabaseHelper dbHelper;
 
     public void testButtonClick(View v){
 
@@ -52,7 +52,7 @@ public class MonsterMain extends AppCompatActivity {
 
         //get db helper
 
-        dbHelper = new MonsterDatabaseHelper(getApplicationContext());
+        dbHelper = new SQLDatabaseHelper(getApplicationContext());
 
         if(dbHelper.getAllMonsters().size() == 0){
 
@@ -78,7 +78,7 @@ public class MonsterMain extends AppCompatActivity {
         partyMonsters = dbHelper.getMonstersFromParty(defaultParty);
         //partyMonsters = new ArrayList<Monster>();
 
-        adapter = new MonsterAdapter(this, partyMonsters);
+        adapter = new SQLMonsterAdapter(this, partyMonsters);
         partyList.setAdapter(adapter);
 
         partyList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
@@ -140,7 +140,7 @@ public class MonsterMain extends AppCompatActivity {
         switch ( item.getItemId()){
             case R.id.action_add:
                 //go to addMonsterActivity and await result
-                Intent i = new Intent(this, AddMonsterActivity.class);
+                Intent i = new Intent(this, SQLMonsterAddActivity.class);
                 startActivityForResult(i, ADD_MONSTER_REQUEST);
                 return true;
             default:
@@ -162,7 +162,7 @@ public class MonsterMain extends AppCompatActivity {
 //          Check if we can add monster
                 for(Monster existingMonster : partyMonsters){
                     if(m.getId() == existingMonster.getId()){
-                        Toast.makeText(MonsterMain.this, "Monster already in party",
+                        Toast.makeText(SQLMonsterMain.this, "Monster already in party",
                                 Toast.LENGTH_SHORT).show();
                         canAddMonster = false;
                     }
@@ -173,7 +173,7 @@ public class MonsterMain extends AppCompatActivity {
                     dbHelper.addMonsterToParty(defaultParty, m);
                     partyMonsters.add(m);
                     refreshListView();
-                    Toast.makeText(MonsterMain.this, "Monster added.",
+                    Toast.makeText(SQLMonsterMain.this, "Monster added.",
                             Toast.LENGTH_SHORT).show();
 
                 }

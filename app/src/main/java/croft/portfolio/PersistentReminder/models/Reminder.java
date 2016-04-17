@@ -130,8 +130,6 @@ public class Reminder implements Parcelable, Comparable<Reminder>{
         return 0;
     }
 
-
-
     public String getTitle() {
         return title;
     }

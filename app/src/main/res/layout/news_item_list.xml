@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <ImageView
+            android:layout_width="97dp"
+            android:layout_height="83dp"
+            android:id="@+id/IconArticle"
+            android:layout_weight="0.03"
+            android:src="@android:drawable/presence_busy" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Article Headline Here..."
+            android:id="@+id/HeadlineText"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:minLines="1"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/IconArticle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/creatorText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="CreatorText"
+        android:id="@+id/creatorText"
+        android:layout_alignBottom="@+id/IconArticle"
+        android:layout_toRightOf="@+id/IconArticle"
+        android:layout_toEndOf="@+id/IconArticle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="DateText"
+        android:paddingLeft="10dp"
+        android:id="@+id/dateText"
+        android:layout_alignTop="@+id/creatorText"
+        android:layout_toRightOf="@+id/creatorText"
+        android:layout_toEndOf="@+id/creatorText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Categories"
+        android:id="@+id/categoryText"
+        android:layout_below="@+id/HeadlineText"
+        android:layout_toRightOf="@+id/dateText"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:layout_alignRight="@+id/HeadlineText"
+        android:layout_alignEnd="@+id/HeadlineText" />
+</RelativeLayout>

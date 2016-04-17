@@ -37,7 +37,7 @@ public class AddReminderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reminder_add_activity);
+        setContentView(R.layout.reminder_activity_add);
         setTitle("Add Reminder");
 
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());

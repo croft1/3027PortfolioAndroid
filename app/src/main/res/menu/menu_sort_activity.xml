@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="fill_parent"
     android:layout_width="180dip"
-    tools:context=".MonsterParty.MonsterMain"         >
+    tools:context=".MonsterPartySQL.SQLMonsterMain"         >
 
 
     <!-- Add AppBar item -->

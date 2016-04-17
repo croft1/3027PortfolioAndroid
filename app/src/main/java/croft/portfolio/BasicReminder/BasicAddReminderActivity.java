@@ -35,7 +35,7 @@ public class BasicAddReminderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reminder_add_activity);
+        setContentView(R.layout.reminder_activity_add);
         setTitle("Add BasicReminder");
 
         addReminder = (Button) findViewById(R.id.addReminderButton);

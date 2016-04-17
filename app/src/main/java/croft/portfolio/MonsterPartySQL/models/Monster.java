@@ -1,4 +1,4 @@
-package croft.portfolio.MonsterParty.models;
+package croft.portfolio.MonsterPartySQL.models;
 
         import android.os.Parcelable;
         import android.os.Parcel;

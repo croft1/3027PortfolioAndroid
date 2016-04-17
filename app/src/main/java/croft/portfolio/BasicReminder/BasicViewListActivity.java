@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import croft.portfolio.BasicReminder.models.BasicReminder;
-import croft.portfolio.PersistentReminder.ViewDetailedReminderActivity;
 import croft.portfolio.R;
 
 public class BasicViewListActivity extends AppCompatActivity {
@@ -40,7 +39,7 @@ public class BasicViewListActivity extends AppCompatActivity {
         setTitle("W4 - Basic Reminder");
         //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.FAB);
 
-        setContentView(R.layout.reminder_main_activity);
+        setContentView(R.layout.reminder_activity_main);
 
         reminderListView = (ListView) findViewById(R.id.reminderList);
 

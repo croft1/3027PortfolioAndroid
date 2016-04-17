@@ -1,4 +1,4 @@
-package croft.portfolio.MonsterParty;
+package croft.portfolio.MonsterPartySQL;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,18 +10,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import croft.portfolio.MonsterParty.models.Monster;
+import croft.portfolio.MonsterPartySQL.models.Monster;
 import croft.portfolio.R;
 
 /**
  * Created by Michaels on 26/3/2016.
  */
-public class MonsterAdapter extends BaseAdapter {
+public class SQLMonsterAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Monster> monsters;
 
-    public MonsterAdapter(Context context, ArrayList<Monster> monsters) {
+    public SQLMonsterAdapter(Context context, ArrayList<Monster> monsters) {
         this.context = context;
         this.monsters = monsters;
     }

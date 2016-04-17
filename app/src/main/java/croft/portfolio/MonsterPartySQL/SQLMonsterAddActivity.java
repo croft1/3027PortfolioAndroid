@@ -1,4 +1,4 @@
-package croft.portfolio.MonsterParty;
+package croft.portfolio.MonsterPartySQL;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +9,13 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import croft.portfolio.MonsterParty.models.Monster;
+import croft.portfolio.MonsterPartySQL.models.Monster;
 import croft.portfolio.R;
 
 /**
  * Created by Michaels on 26/3/2016.
  */
-public class AddMonsterActivity extends AppCompatActivity {
+public class SQLMonsterAddActivity extends AppCompatActivity {
 
     ListView monsterAddList;
 
@@ -26,11 +26,11 @@ public class AddMonsterActivity extends AppCompatActivity {
         monsterAddList = (ListView) findViewById(R.id.monsterListView);
 
         //create dapter and populate
-        MonsterDatabaseHelper dbHelper = new MonsterDatabaseHelper(getApplicationContext());
+        SQLDatabaseHelper dbHelper = new SQLDatabaseHelper(getApplicationContext());
         ArrayList<Monster> monsters = new
                 ArrayList<>(dbHelper.getAllMonsters().values());
 
-        MonsterAdapter adapter = new MonsterAdapter(this, monsters);
+        SQLMonsterAdapter adapter = new SQLMonsterAdapter(this, monsters);
         monsterAddList.setAdapter(adapter);
 
         setTitle("Select Monster to Add");

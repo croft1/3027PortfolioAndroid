@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import croft.portfolio.R;
 
@@ -22,6 +23,11 @@ public class CalculatorMain extends AppCompatActivity {
     private TextView firstNumView;
     private TextView secondNumView;
     private TextView opView;
+
+    public static final String ADDITION_SYMBOL = "+";
+    public static final String SUBTRACTION_SYMBOL = "-";
+    public static final String MULTIPLICATION_SYMBOL = "*";
+    public static final String DIVISION_SYMBOL = "/";
 
     @Override
 
@@ -49,6 +55,11 @@ public class CalculatorMain extends AppCompatActivity {
         final Button bSubtract = (Button) findViewById(R.id.subtractButton);
         final Button bMultiply = (Button) findViewById(R.id.multiplyButton);
         final Button bDivide = (Button) findViewById(R.id.divideButton);
+
+        bAddition.setText(ADDITION_SYMBOL);
+        bDivide.setText(DIVISION_SYMBOL);
+        bMultiply.setText(MULTIPLICATION_SYMBOL);
+        bSubtract.setText(SUBTRACTION_SYMBOL);
 
 
 
@@ -99,14 +110,25 @@ public class CalculatorMain extends AppCompatActivity {
         double firstNumber = Double.valueOf(firstNumberInput.getText().toString());
         double secondNumber = Double.valueOf(secondNumberInput.getText().toString());
 
-        Calculator calc = new Calculator(firstNumber, secondNumber, selectedOperation);
+        if(selectedOperation.toString() == DIVISION_SYMBOL &&                      //checking div by 0
+                (secondNumber == 0|| firstNumber == 0)){
 
-        TextView resultText = (TextView) findViewById(R.id.resultDisplayer);
-        resultText.setText(String.valueOf(calc.performOperation()));
+            Toast.makeText(getApplicationContext(), "Can't divide by zero", Toast.LENGTH_SHORT).show();
 
-        Double result = calc.roundToTwoDecimalPlaces(calc.performOperation());
+        }else{
 
-        resultText.setText(String.valueOf(result));
+
+
+            Calculator calc = new Calculator(firstNumber, secondNumber, selectedOperation);
+
+            TextView resultText = (TextView) findViewById(R.id.resultDisplayer);
+            resultText.setText(String.valueOf(calc.getAnswer()));
+
+            Double result = calc.roundToTwoDecimalPlaces(calc.performOperation());
+
+            resultText.setText(String.valueOf(result));
+        }
+
 
         //TODO: store history of calculations in a file, so user can retrieve them
     }
@@ -114,13 +136,16 @@ public class CalculatorMain extends AppCompatActivity {
 
 
     public boolean calcEnableAllowed(){
-        return selectedOperation != null &&
+
+        return selectedOperation != null &&                               //check empty or unselected
                 secondNumberInput.getText().toString().length() > 0 &&
                 firstNumberInput.getText().toString().length() > 0;
+
+
     }
 
     public void enableCalculateButton() {
-        Button c = (Button) findViewById(R.id.calculate);
+        Button c = (Button) findViewById(R.id.calculate);                   //activate button
         c.setBackgroundColor(getPrimary());
         c.setEnabled(true);
     }

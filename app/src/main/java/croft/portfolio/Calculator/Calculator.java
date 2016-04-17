@@ -11,10 +11,35 @@ public class Calculator {
     double secondNumber;
     String operation;
 
+    public double getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(double answer) {
+        this.answer = answer;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public double getSecondNumber() {
+        return secondNumber;
+    }
+
+    public double getFirstNumber() {
+        return firstNumber;
+    }
+
+    double answer;
+
+
+
     public Calculator(double firstNumber, double secondNumber, String operation){
         setFirstNumber(firstNumber);
         setSecondNumber(secondNumber);
         setOperation(operation);
+        answer = performOperation();
     }
 
     public double performOperation(){
@@ -22,11 +47,11 @@ public class Calculator {
         double resultOfCalculation = 123456789;
 
         switch(operation) {
-            case "+":{
+            case CalculatorMain.ADDITION_SYMBOL:{
                 resultOfCalculation = add();
                 break;
             }
-            case "/":{
+            case CalculatorMain.DIVISION_SYMBOL:{
                 if(canDivide()){
                     resultOfCalculation = divide();
                 }else{
@@ -35,11 +60,11 @@ public class Calculator {
                 }
                 break;
             }
-            case "-":{
+            case CalculatorMain.SUBTRACTION_SYMBOL:{
                 resultOfCalculation = subtract();
                 break;
             }
-            case "*":{
+            case CalculatorMain.MULTIPLICATION_SYMBOL:{
                 resultOfCalculation = multiply();
                 break;
             }

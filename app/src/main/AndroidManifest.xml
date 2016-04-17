@@ -2,33 +2,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="croft.portfolio">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/tick"
         android:label="Carter 3027 A1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="croft.portfolio.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name="croft.portfolio.NameGenerator.NameGenMain" />
-        <activity android:name="croft.portfolio.NameGenerator.NameViewActivity" />
-        <activity android:name="croft.portfolio.Calculator.CalculatorMain" />
-        <activity android:name="croft.portfolio.MonsterParty.MonsterMain" />
-        <activity android:name="croft.portfolio.MonsterParty.AddMonsterActivity" />
-        <activity android:name="croft.portfolio.BasicReminder.BasicViewListActivity" />
-        <activity android:name="croft.portfolio.BasicReminder.BasicAddReminderActivity" />
-        <activity android:name="croft.portfolio.BasicReminder.BasicViewDetailedReminderActivity" />
-        <activity android:name="croft.portfolio.PersistentReminder.AddReminderActivity"/>
-        <activity android:name="croft.portfolio.PersistentReminder.ViewDetailedReminderActivity" />
+        <activity android:name=".Calculator.CalculatorMain" />
+        <activity android:name=".NameGenerator.NameGenMain" />
+        <activity android:name=".NameGenerator.NameViewActivity" />
+        <activity android:name=".MonsterPartySQL.SQLMonsterMain" />
+        <activity android:name=".MonsterPartySQL.SQLMonsterAddActivity" />
+        <activity android:name=".BasicReminder.BasicViewListActivity" />
+        <activity android:name=".BasicReminder.BasicAddReminderActivity" />
+        <activity android:name=".BasicReminder.BasicViewDetailedReminderActivity" />
+        <activity android:name=".PersistentReminder.AddReminderActivity" />
+        <activity android:name=".PersistentReminder.ViewDetailedReminderActivity" />
         <activity android:name=".PersistentReminder.MainViewListActivity" />
-
+        <activity android:name=".MonsterPartyHTTP.MonsterMain" />
+        <activity android:name=".MonsterPartyHTTP.AddMonsterActivity" />
+        <activity android:name=".NewsReader.NewsMain" />
+        <activity android:name=".NewsReader.NewsFullArticleActivity" />
     </application>
 
 </manifest>

@@ -1,9 +1,7 @@
 package croft.portfolio.PersistentReminder;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,7 +31,7 @@ public class ViewDetailedReminderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        setContentView(R.layout.reminder_detailed_activity);
+        setContentView(R.layout.reminder_activity_detailed);
 
         titleLabel = (EditText) findViewById(R.id.editTitleField);
         descriptionLabel = (EditText) findViewById(R.id.editDescriptionField);
@@ -94,7 +90,6 @@ public class ViewDetailedReminderActivity extends AppCompatActivity {
             case R.id.deleteReminder:
                 i = new Intent(this, MainViewListActivity.class);
                 i.putExtra(MainViewListActivity.DELETE_REMINDER_INTENT, currentReminder);
-                Toast.makeText(getApplicationContext(), "Reminder Complete?  " + currentReminder.isComplete(), Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 startActivity(i);
                 finish();

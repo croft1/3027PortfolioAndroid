@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class BasicReminderItemAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            view = inflater.inflate(R.layout.reminder_list_item, null);
+            view = inflater.inflate(R.layout.reminder_item_list, null);
 
             vh = new ViewHolder();
             vh.title = (TextView) view.findViewById(R.id.titleLabel);
