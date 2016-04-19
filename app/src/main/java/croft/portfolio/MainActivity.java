@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.tute6Button:
                 //i = new Intent(this, NewsMain.class);
-                i = new Intent(this, NewsFullArticleActivity.class);
+                i = new Intent(this, NewsMain.class);
                 startActivity(i);
                 break;
             default:

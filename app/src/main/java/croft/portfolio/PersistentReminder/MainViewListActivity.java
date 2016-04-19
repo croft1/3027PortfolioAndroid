@@ -70,7 +70,7 @@ public class MainViewListActivity extends AppCompatActivity {
             }
         });
 
-
+        //handling long click, delete dialog and undo snackbar
         reminderListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
@@ -88,14 +88,11 @@ public class MainViewListActivity extends AppCompatActivity {
                     //listen for ok click
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                      //Remove from db, list and update listView to show it
                         final Reminder toRemove = reminders.get(position);
                         reminders.remove(position);
                         dbHelper.removeReminder(toRemove);
                         refreshListView();
-
-
                         //show snackbar to say its deleted, give option to undo action
                         Snackbar.make(view, "Reminder removed.", Snackbar.LENGTH_LONG)
                                 .setAction("Undo", new View.OnClickListener(){
@@ -103,13 +100,11 @@ public class MainViewListActivity extends AppCompatActivity {
                                     public void onClick(View v){
                                         //when undo is pressed, click listener adds the recently deleted reminder back
                                         // to list and db, then refreshes view
-
                                         reminders.add(position, toRemove);
                                         dbHelper.addReminder(toRemove);
                                         refreshListView();
                                     }
                                 }).show();
-
                     }
                 });
 
@@ -248,7 +243,6 @@ public class MainViewListActivity extends AppCompatActivity {
                     Reminder r;
 
                     Intent i = getIntent();
-                    Bundle extras = i.getExtras();
 
                     Toast.makeText(getApplicationContext(), Boolean.toString(i.hasExtra(DELETE_REMINDER_INTENT)) , Toast.LENGTH_SHORT).show();
 
@@ -262,16 +256,8 @@ public class MainViewListActivity extends AppCompatActivity {
                         }
                     }
 
-
-                       //breaks here if you hit back after editing reminder
-
-
-
                     adapter.notifyDataSetChanged();
-//                    Intent update = new Intent(MainViewListActivity.this, MainViewListActivity.class);
 //
-//                    this.finish();
-//                    startActivity(update);
                 }
                 break;
             default:

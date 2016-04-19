@@ -1,5 +1,6 @@
 package croft.portfolio.NewsReader;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,8 @@ public class NewsFullArticleActivity extends AppCompatActivity {
 
 
     private WebView webView;
-    private static final String DEFAULT_PAGE_URL = "http://www.google.com";// file:///android_asset/web_view.html
+    private static final String DEFAULT_PAGE_URL = "http://www.abc.net.au";// file:///android_asset/web_view.html
+    private String requestedURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +26,19 @@ public class NewsFullArticleActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
 
+        //get intent with request url from list objects data
+        Intent i = getIntent();
+        requestedURL = i.getParcelableExtra(NewsMain.REQUEST_ARTICLE_URL);
 
-        webView.loadUrl(DEFAULT_PAGE_URL);
+
+        //simply show the web page of item clicked in full inside the app
+        if(requestedURL == null){
+            webView.loadUrl(DEFAULT_PAGE_URL);
+        }else{
+            webView.loadUrl(requestedURL);
+        }
 
         webView.getSettings().setJavaScriptEnabled(true);
-
-
-        //get intent with request url from list objects data
 
     }
 }
