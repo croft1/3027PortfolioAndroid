@@ -40,7 +40,8 @@ public class Article implements Comparable<Article>, Serializable{
                     ")"
             ;
 
-    public static final String DATE_FORMAT = "ddd, d MMM yyyy HH:mm:ss Z";        //eg. Sun, 17 Apr 2016 15:02:58 +1000
+    public static final String DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";        //eg. Sun, 17 Apr 2016 15:02:58 +1000
+
     private static long assignId = 999999;
     private long id;
     private String headline;
@@ -196,11 +197,11 @@ public class Article implements Comparable<Article>, Serializable{
         return getId() + getCreator() + getHeadline() + getPublishDate() + getCategory() + getDirectLink() ;
     }
 
-    private Date stringToDate(String ddMMyyyy){
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    private Date stringToDate(String date){
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT);
         Date d;
         try {
-            d = df.parse(ddMMyyyy);
+            d = df.parse(date);
             setPublishDate(d);
         } catch (ParseException e) {
             e.printStackTrace();
