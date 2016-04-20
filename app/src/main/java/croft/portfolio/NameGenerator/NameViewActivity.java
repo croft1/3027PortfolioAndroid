@@ -7,6 +7,8 @@ package croft.portfolio.NameGenerator;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.TextView;
 
 import croft.portfolio.R;
@@ -40,4 +42,6 @@ public class NameViewActivity extends AppCompatActivity {
 
 
     }
+
+
 }

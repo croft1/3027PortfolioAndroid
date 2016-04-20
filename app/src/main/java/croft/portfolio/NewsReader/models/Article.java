@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import croft.portfolio.other.SerialBitmap;
 
 /**
  * Created by Michaels on 17/4/2016.
@@ -49,7 +48,7 @@ public class Article implements Comparable<Article>, Serializable{
     private String directLink;
     private String category;        //if multiple categories we'll append them together
     private String creator;
-    private SerialBitmap image;
+    private String imageLink;
 
     public Article() {
         setId(1);
@@ -59,10 +58,10 @@ public class Article implements Comparable<Article>, Serializable{
         setDirectLink("http://www.google.com");
     }
     //may need to vararg Category to cope with multiple cats
-    public Article(Long id, String headline, String creator, String publishDate, String Category, String directLink, SerialBitmap icon)   {
+    public Article(Long id, String headline, String creator, String publishDate, String Category, String directLink, String iconLink)   {
 
 
-        setIcon(icon);
+
 
         if(id == null){
             setId(assignId++);          //random default id just in case
@@ -81,7 +80,7 @@ public class Article implements Comparable<Article>, Serializable{
                 stringToDate(publishDate));     //it is assumed abc will always have the same date format
         setCategory(Category);
         setDirectLink(directLink);
-
+        setIconLink(iconLink);
     }
 /*
     public Article(Parcel in){
@@ -174,13 +173,9 @@ public class Article implements Comparable<Article>, Serializable{
         this.category = category;
     }
 
-    public SerialBitmap getIcon() {
-        return image;
-    }
+    public void setIconLink(String link){ this.imageLink = link; }
 
-    public void setIcon(SerialBitmap image) {
-        this.image = image;
-    }
+    public String getIconLink(){return imageLink;}
 
     @TargetApi(19)
     @Override
@@ -194,7 +189,12 @@ public class Article implements Comparable<Article>, Serializable{
 
     @Override
     public String toString() {
-        return getId() + getCreator() + getHeadline() + getPublishDate() + getCategory() + getDirectLink() ;
+        return "ID: " + getId() +
+                "creator" + getCreator() +
+                "headline" + getHeadline() +
+                "publishDate" + getPublishDate() +
+                "category" + getCategory() +
+                "directLink" + getDirectLink() ;
     }
 
     private Date stringToDate(String date){

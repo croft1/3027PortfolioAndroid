@@ -9,7 +9,10 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class NameGenMain extends AppCompatActivity {
     private EditText inputMaiden;
     private EditText inputBirth;
     private EditText inputBrand;
+    private Button generateButton;
     ArrayList <EditText> inputs = new ArrayList<EditText>();
 
     @Override
@@ -37,6 +41,7 @@ public class NameGenMain extends AppCompatActivity {
         inputMaiden = (EditText) findViewById(R.id.inputMaiden);
         inputBirth = (EditText) findViewById(R.id.inputBirth);
         inputBrand = (EditText) findViewById(R.id.inputBrand);
+        generateButton = (Button) findViewById(R.id.generateButton);
 
 
         inputs.add(inputBirth);
@@ -57,21 +62,30 @@ public class NameGenMain extends AppCompatActivity {
                 empty = true;
         }
         Person gen;
-        if (!empty){
+        if (inputBirth.getText().toString().length() > 2 &&
+                inputBrand.getText().toString().length() > 2 &&
+                inputFirstName.getText().toString().length() > 2 &&
+                inputLastName.getText().toString().length() > 2 &&
+                inputMaiden.getText().toString().length() > 2)
+        {
             gen = new Person(inputFirstName.getText().toString(),
                     inputLastName.getText().toString(), inputMaiden.getText().toString(),
                     inputBirth.getText().toString(), inputBrand.getText().toString());
+
+
 
             Intent i = new Intent(this, NameViewActivity.class);
             i.putExtra("person", gen);
             startActivity(i);
 
         }else{
-            doAlertDialog("Alert", "One or more inputs are empty");
+            doAlertDialog("Alert", "One or more inputs are empty or have too few inputs");
         }
 
 
     }
+
+
 
     public void doAlertDialog(String title, String message){
 

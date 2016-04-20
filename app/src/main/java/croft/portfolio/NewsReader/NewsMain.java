@@ -5,8 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,7 +33,8 @@ import java.util.List;
 
 import croft.portfolio.NewsReader.models.Article;
 import croft.portfolio.R;
-import croft.portfolio.other.SerialBitmap;
+
+
 
 public class NewsMain extends AppCompatActivity {
 
@@ -39,6 +42,7 @@ public class NewsMain extends AppCompatActivity {
 
     public static final String ARTICLE_XML_FEED_URL = "http://www.abc.net.au/news/feed/51120/rss.xml";
     public static final String ARTICLE_FEED_URL = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20feed%20where%20url=%27www.abc.net.au%2Fnews%2Ffeed%2F51120%2Frss.xml%27&format=json";
+
     private static final String ITEM_TAG = "item";
     private static final String HEADLINE_TAG = "title";
     private static final String PUBLISH_DATE_TAG = "pubDate";
@@ -47,7 +51,7 @@ public class NewsMain extends AppCompatActivity {
     private static final String IMAGE_TAG = "thumbnail";
     private static final String LINK_TAG = "link";
 
-    private NewsDbHelper dbHelper;
+    //private NewsDbHelper dbHelper;
     private NewsAdapter adapter;
     private ArrayList<Article> articles = new ArrayList<>();
     private ListView articleListView;
@@ -61,18 +65,20 @@ public class NewsMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_activity_main);
         setTitle("ABC news");
-        dbHelper = new NewsDbHelper(getApplicationContext());
+        //dbHelper = new NewsDbHelper(getApplicationContext());
 
-        if (dbHelper.getAllArticles().size() != 0) {
+        /*if (dbHelper.getAllArticles().size() != 0) {
 
             ArrayList<Article> convertList = new ArrayList<>(dbHelper.getAllArticles().values());
             articles = convertList;
-        }
+        }*/
 
         //new SetupArticleDatasetTaskFromXML().execute(ARTICLE_XML_FEED_LOCATION);
-        new SetupArticleDatasetTaskJSON().execute(ARTICLE_FEED_URL);
+
 
         articleListView = (ListView) findViewById(R.id.articleListView);
+
+        new SetupArticleDatasetTaskJSON().execute(ARTICLE_FEED_URL);
 
 
         //adapter.notifyDataSetChanged();
@@ -91,6 +97,8 @@ public class NewsMain extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     private class SetupArticleDatasetTaskJSON extends AsyncTask<String, Void, String> {
@@ -100,7 +108,7 @@ public class NewsMain extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... urls) {
-            android.os.Debug.waitForDebugger();
+            //android.os.Debug.waitForDebugger();
             try {
 
                 URL downloadURL = new URL(urls[0]);
@@ -112,10 +120,11 @@ public class NewsMain extends AppCompatActivity {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(input));
                 StringBuilder sb = new StringBuilder();
 
+                System.out.println("Fetching results");
                 while ((result = reader.readLine()) != null) {
                     sb.append(result);
                 }
-
+                System.out.println("fetch complete");
 
 
                 return sb.toString();
@@ -136,6 +145,13 @@ public class NewsMain extends AppCompatActivity {
         }
 
         @Override
+        protected void onCancelled() {
+            super.onCancelled();
+
+
+        }
+
+        @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
@@ -145,7 +161,6 @@ public class NewsMain extends AppCompatActivity {
                     // reference:  got confused with terminology and the logic flow http://stackoverflow.com/questions/9787461/get-string-from-json-with-nested-json-object-and-nested-json-arrays-with-multipl
                     //take the entire string and put it in a JSON {object}
                     jsonObject = new JSONObject(s.toString());
-                    System.out.println("###################################### \n " + s.toString() + "###################################### ");
 
                     //move inward to the results of the json in order
 
@@ -160,90 +175,63 @@ public class NewsMain extends AppCompatActivity {
 
 
 
-                    for (int i = 1; i < organisedJsonArticle.length(); i++) { System.out.println("###################################### \n " + jsonObject.toString() + "###################################### ");
+                    for (int i = 1; i < 10; i++) {       //TODO change to i < count when testing done
 
+                        jsonObject = organisedJsonArticle.getJSONObject(i);   //select to i'th object. This can then get information extracted from it
 
-
-                        jsonObject = (JSONObject) organisedJsonArticle.get(i);   //select to i'th object. This can then get information extracted from it
-
-                        //ArrayList<String> tags = new ArrayList<>();       //maybe add in every tag and loop through them
-
-                        //going through each item in the json
-                        String headline = jsonObject.getString(HEADLINE_TAG);
+                        String headline = jsonObject.getString(HEADLINE_TAG);    //going through each item in the json
                         String link = jsonObject.getString(LINK_TAG);
-                        String desc = jsonObject.getString("description");
-                        String creator = null;
+                        String creator = "ABC News";
 
-                        if(!jsonObject.isNull(CREATOR_TAG)){
+                        if(!jsonObject.isNull(CREATOR_TAG)){            //article doesn't always have a creator
                             creator = jsonObject.getString(CREATOR_TAG);
                         }
 
                         String pubDate = jsonObject.getString(PUBLISH_DATE_TAG);
-                        JSONObject obj = jsonObject.getJSONObject("guid");
-                        Boolean isPermalink = obj.getBoolean("isPermaLink");
-                        String content = obj.getString("content");
+
                         String categories;
                         JSONArray jArray;
-                        try{
+
+                        try {
                             jArray = jsonObject.getJSONArray(CATEGORY_TAG);   //get the array of categories
-                             categories = "";
+                            categories = "";
 
                             for (int counter = 0; counter < jArray.length(); counter++) {     //if there is no category object (a singular category)
                                 categories += jArray.getString(counter);
                             }
-
-                        }catch(Exception e){
-                            categories = jsonObject.getString(CATEGORY_TAG);        //you get it from here
+                        } catch (Exception e) {
+                            categories = jsonObject.getString(CATEGORY_TAG);
+                        }
+                        String thumbURL;
+                        if(jsonObject.has("group")){
+                            JSONObject jsonGroup = jsonObject.getJSONObject("group");
+                            JSONObject jsonThumbnail = jsonGroup.getJSONObject(IMAGE_TAG);
+                            thumbURL = jsonThumbnail.getString("url");
+                        }else{
+                            thumbURL = "http://www.abc.net.au/homepage/2013/styles/img/abc.png";        //set default
                         }
 
-                        obj = jsonObject.getJSONObject("group");
-                        desc = obj.getString("description");        //overridden as this one is cleaner
-                        jArray = obj.getJSONArray("content");
+                        //overridden as this one is cleaner, dont really care for it - not using it though.
 
 
-                        String[] tags =  {"height", "medium", "type", "url", "width"};
-
-                        for (int counter = 0; counter < jArray.length(); counter++) {     //step through numbered objects inside the content JSONarray
-                            jsonObject = jArray.getJSONObject(counter);      //counter children are named by numbers
-                            String iterator = jArray.getString(counter);
-
-                            for(int step = 0; step < tags.length; step++)       //using the same variable as i don't care for the data, just to move passed that part of JSON
-                            try{
-                                iterator = obj.getString(tags[step]);
-                            }catch(Exception e){  }
-                        }
-
-                        jsonObject = obj.getJSONObject(IMAGE_TAG);
-                        int thumbHeight = jsonObject.getInt("height");
-                        String thumbURL = jsonObject.getString("url");
-                        int thumbWidth = jsonObject.getInt("width");
-
-                        System.out.println(categories.toString() + "\n");
-
-                        Bitmap bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.abc);
 
 
                         //to process the bitmap for the constructor, porobably should do it after and have the link stored in the object
-                        try{
 
-                            //DownloadImageTasknew DownloadImageTask().execute(thumbURL);         //get link of image, download it and transform into a bitmap
-
-                        }catch(Exception e){
-
-                            e.printStackTrace();
-                        }
                         //create object
-                        Article extractedArticle = new Article(new Long(i),
+                        long id = (long) i;
+
+                        Article extractedArticle = new Article(id,
                                 headline,
                                 creator,
                                 pubDate,
                                 categories,
                                 thumbURL,
-                                new SerialBitmap(bm)
+                                link
                         );
-
-                        System.out.println("###################################### \n "
-                                + extractedArticle.toString() + "\n###################################### ");
+                        if((i % 50) == 0){
+                            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "  + extractedArticle.toString() );
+                        }
 
                         articles.add(extractedArticle);
                         //dbHelper.addArticle(extractedArticle);      //saving the bitmap probably won't work
@@ -254,15 +242,23 @@ public class NewsMain extends AppCompatActivity {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                progressBar.setVisibility(View.GONE);
+                articleListView.setVisibility(View.VISIBLE);
+
+
 
                 adapter = new NewsAdapter(getBaseContext(), articles);
 
                 articleListView.setChoiceMode(articleListView.CHOICE_MODE_SINGLE);
                 articleListView.setSelector(android.R.color.darker_gray);
+
                 articleListView.setAdapter(adapter);
 
-                progressBar.setVisibility(View.GONE);
-                articleListView.setVisibility(View.VISIBLE);
+
+
+
+
+
             }
         }
 
@@ -302,7 +298,7 @@ public class NewsMain extends AppCompatActivity {
                     articles = (ArrayList<Article>) parseXml(input);
 
                     for (int i = 0; i < articles.size(); i++) {
-                        dbHelper.addArticle(articles.get(i));
+                       // dbHelper.addArticle(articles.get(i));
                     }
 
 
@@ -448,31 +444,7 @@ public class NewsMain extends AppCompatActivity {
         }
 
 
-        private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-            ImageView iv;
 
-
-            public DownloadImageTask(ImageView iv) {
-                this.iv = iv;
-            }
-
-            protected Bitmap doInBackground(String... urls) {
-                String urlDisplay = urls[0];
-                Bitmap image = null;
-                try {
-                    InputStream in = new java.net.URL(urlDisplay).openStream();
-                    image = BitmapFactory.decodeStream(in);
-                } catch (Exception e) {
-                    Log.e("ERROR getting image", e.getMessage());
-                    e.printStackTrace();
-                }
-                return image;
-            }
-
-            protected void onPostExecute(Bitmap result) {
-                iv.setImageBitmap(result);
-            }
-        }
 
 
     }

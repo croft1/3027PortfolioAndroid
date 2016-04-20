@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -56,11 +57,17 @@ public class ViewDetailedReminderActivity extends AppCompatActivity {
         Intent i;
         switch (v.getId()) {
             case R.id.saveButton:
-                currentReminder.setComplete(!currentReminder.isComplete());
-                //TODO edit text fields in detailed reminder
-                i = new Intent(this, MainViewListActivity.class);
-                i.putExtra(MainViewListActivity.EDIT_REMINDER_INTENT, currentReminder);
+
+                Reminder updatedReminder = new Reminder(currentReminder.getId(),    //takes new reminder and just puts whatever is input into params
+                        titleLabel.getText().toString(),
+                        descriptionLabel.getText().toString(),
+                        dateLabel.getText().toString(), completeCheckBox.isChecked());
+
+
+                i = new Intent(this, MainViewListActivity.class);       //create new intent
+                i.putExtra(MainViewListActivity.EDIT_REMINDER_INTENT, updatedReminder);     //push this edit reminder intent to main activity
                 setResult(RESULT_OK);
+                Toast.makeText(getApplicationContext(), "Edited", Toast.LENGTH_SHORT);
                 startActivity(i);
                 finish();
                 break;
@@ -87,13 +94,13 @@ public class ViewDetailedReminderActivity extends AppCompatActivity {
 
 
                 break;
-            case R.id.deleteReminder:
+            /*case R.id.deleteReminder:
                 i = new Intent(this, MainViewListActivity.class);
                 i.putExtra(MainViewListActivity.DELETE_REMINDER_INTENT, currentReminder);
                 setResult(RESULT_OK);
                 startActivity(i);
                 finish();
-                break;
+                break;*/
         }
     }
 

@@ -1,6 +1,10 @@
 package croft.portfolio.NewsReader;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +12,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import croft.portfolio.NewsReader.models.Article;
 import croft.portfolio.R;
-import croft.portfolio.other.SerialBitmap;
+
 
 /**
  * Created by Michaels on 17/4/2016.
@@ -61,13 +66,16 @@ public class NewsAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        SerialBitmap icon = articles.get(i).getIcon();
+        String iconLink = articles.get(i).getIconLink();
         String headline = articles.get(i).getHeadline();
         String creator = articles.get(i).getCreator();
         String date   = articles.get(i).getPublishDate().toString();
         String category = articles.get(i).getCategory();
 
-        holder.icon.setImageBitmap(icon.getBitmap());
+        new DownloadImageTask(holder.icon).execute(iconLink);
+
+
+
         holder.headline.setText(headline);
         holder.creator.setText(creator);
         holder.date.setText(date);
@@ -92,6 +100,32 @@ public class NewsAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return 0;
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView iv;
+
+
+        public DownloadImageTask(ImageView iv) {
+            this.iv = iv;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urlDisplay = urls[0];
+            Bitmap image = null;
+            try {
+                InputStream in = new java.net.URL(urlDisplay).openStream();
+                image = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("ERROR getting image", e.getMessage());
+                e.printStackTrace();
+            }
+            return image;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            iv.setImageBitmap(result);
+        }
     }
 
 }

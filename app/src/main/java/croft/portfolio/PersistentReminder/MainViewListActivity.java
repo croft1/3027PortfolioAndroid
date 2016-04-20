@@ -61,17 +61,17 @@ public class MainViewListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int pos, long id) {
 
-            Reminder result = (Reminder) reminderListView.getAdapter().getItem(pos);
+                Reminder result = (Reminder) reminderListView.getAdapter().getItem(pos);
 
-            Intent intent = new Intent(MainViewListActivity.this, ViewDetailedReminderActivity.class);
-            intent.putExtra(EDIT_REMINDER_INTENT, result);
-            startActivityForResult(intent, EDIT_REQUEST);
+                Intent intent = new Intent(MainViewListActivity.this, ViewDetailedReminderActivity.class);
+                intent.putExtra(EDIT_REMINDER_INTENT, result);
+                startActivityForResult(intent, EDIT_REQUEST);
 
             }
         });
 
         //handling long click, delete dialog and undo snackbar
-        reminderListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        reminderListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
 
@@ -88,16 +88,16 @@ public class MainViewListActivity extends AppCompatActivity {
                     //listen for ok click
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                     //Remove from db, list and update listView to show it
+                        //Remove from db, list and update listView to show it
                         final Reminder toRemove = reminders.get(position);
                         reminders.remove(position);
                         dbHelper.removeReminder(toRemove);
                         refreshListView();
                         //show snackbar to say its deleted, give option to undo action
                         Snackbar.make(view, "Reminder removed.", Snackbar.LENGTH_LONG)
-                                .setAction("Undo", new View.OnClickListener(){
+                                .setAction("Undo", new View.OnClickListener() {
                                     @Override
-                                    public void onClick(View v){
+                                    public void onClick(View v) {
                                         //when undo is pressed, click listener adds the recently deleted reminder back
                                         // to list and db, then refreshes view
                                         reminders.add(position, toRemove);
@@ -151,8 +151,8 @@ public class MainViewListActivity extends AppCompatActivity {
                 }
 
                 if (isSorted) {
-                   Collections.sort(reminders, Collections.<Reminder>reverseOrder());
-                  sort = "Descending order";
+                    Collections.sort(reminders, Collections.<Reminder>reverseOrder());
+                    sort = "Descending order";
                 } else {
                     Collections.sort(reminders);
                     sort = "Ascending order";
@@ -160,14 +160,14 @@ public class MainViewListActivity extends AppCompatActivity {
 
                 isSorted = !isSorted;
 
-                pushToast(sort);
+                pushToast("sorted" + sort);
                 refreshListView();
 
                 return true;
 
             case R.id.clear_reminders:
                 //think this is the first option inside the 3 dot menu
-                for(Reminder toDelete : reminders){
+                for (Reminder toDelete : reminders) {
                     dbHelper.removeReminder(toDelete);
                 }
                 reminders.clear();
@@ -217,12 +217,11 @@ public class MainViewListActivity extends AppCompatActivity {
                     for (Reminder existing : reminders) {
                         if (r.getId() == existing.getId() || r.getTitle() == existing.getTitle()) {
                             pushToast("I don't think you were intending on adding a duplicate reminder");
-                            currentToast.show();
                             canAdd = false;
                         }
                     }
 
-                    if(canAdd){
+                    if (canAdd) {
                         reminders.add(r);
                         dbHelper.addReminder(r);
                         refreshListView();
@@ -230,7 +229,7 @@ public class MainViewListActivity extends AppCompatActivity {
 
                     pushToast("Reminder added");
                     //an intent to itself to restart activity, which refreshes list
-                    refreshListView();
+
 //                    Intent update = new Intent(this, MainViewListActivity.class);
 //                    this.finish();
 //                    startActivity(update);
@@ -244,26 +243,49 @@ public class MainViewListActivity extends AppCompatActivity {
 
                     Intent i = getIntent();
 
-                    Toast.makeText(getApplicationContext(), Boolean.toString(i.hasExtra(DELETE_REMINDER_INTENT)) , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), Boolean.toString(i.hasExtra(DELETE_REMINDER_INTENT)), Toast.LENGTH_SHORT).show();
 
-                    if(i.hasExtra(DELETE_REMINDER_INTENT)){
-                        r = data.getParcelableExtra(DELETE_REMINDER_INTENT);
-                        dbHelper.removeReminder(r);
-                        Toast.makeText(getApplicationContext(), r.getTitle() + " deleted.", Toast.LENGTH_SHORT).show();
-                    }else{
-                        if(i.hasExtra(EDIT_REMINDER_INTENT)){
-                            r = data.getParcelableExtra(EDIT_REMINDER_INTENT);
+                    if (i.hasExtra(DELETE_REMINDER_INTENT)) {
+                        r = i.getParcelableExtra(DELETE_REMINDER_INTENT);            //store r object from parcel
+                        dbHelper.removeReminder(r);     //get item that is inside database and delete it
+                        pushToast(r.getTitle() + " deleted.");
+                        if (reminders.contains(r)) {
+                            reminders.remove(reminders.indexOf(r));         //deletes object from array when found
                         }
-                    }
+                        refreshListView();
+                    } else {
+                        if (i.hasExtra(EDIT_REMINDER_INTENT)) {
+                            r = i.getParcelableExtra(EDIT_REMINDER_INTENT);
 
-                    adapter.notifyDataSetChanged();
-//
+                            dbHelper.updateReminder(r);
+
+                            boolean has = false;
+                            int count = 0;
+                            for (count = 0; (count < reminders.size() || has); count++) {
+                                if (reminders.get(count).getId() == r.getId()) {
+                                    has = true;
+                                }
+                            }
+                            if (has){
+                                reminders.set(count, r);     //replace updated object in array when its found
+                                pushToast(r.getTitle() + " updated.");
+                            }
+
+
+                        }
+
+                    }
                 }
                 break;
             default:
                 pushToast("FAILED");
         }
+        refreshListView();
     }
+
+
+
+
 
     public void doAlertDialog(String title, String message) {
 
@@ -300,7 +322,7 @@ public class MainViewListActivity extends AppCompatActivity {
 
     private void pushToast(String message) {
         //toast is null when it isn't on screen. currentToast will only be != null when its shown
-        if (currentToast != null){
+        if (currentToast != null) {
             currentToast.cancel();
         }
         currentToast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);

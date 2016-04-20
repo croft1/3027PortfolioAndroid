@@ -97,4 +97,18 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void updateReminder(Reminder r){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Reminder.COLUMN_TITLE, r.getTitle());
+        values.put(Reminder.COLUMN_DESCRIPTION, r.getDescription());
+        values.put(Reminder.COLUMN_DUEDATE, r.getDueDateString());
+        values.put(Reminder.COLUMN_COMPLETE, r.isComplete());       //creating content values dataset
+        db.update(Reminder.TABLE_NAME,values, Reminder.COLUMN_ID + " =?", new String[]{String.valueOf(r.getId())});
+       // removeReminder(r);      //deletes the item with the same id that will already be in the database
+       // addReminder(r);     //adds this reminder at the end of the database, with the same id. Can be sorted so position doesn't really matter
+         db.close();
+
+    }
+
 }
