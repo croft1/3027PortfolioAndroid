@@ -80,6 +80,15 @@ public class NewsMain extends AppCompatActivity {
 
         new SetupArticleDatasetTaskJSON().execute(ARTICLE_FEED_URL);
 
+        adapter = new NewsAdapter(this, articles);
+
+        System.out.println(adapter.getCount());
+
+        articleListView.setChoiceMode(articleListView.CHOICE_MODE_SINGLE);
+        articleListView.setSelector(android.R.color.darker_gray);
+
+        articleListView.setAdapter(adapter);
+
 
         //adapter.notifyDataSetChanged();
 
@@ -175,7 +184,7 @@ public class NewsMain extends AppCompatActivity {
 
 
 
-                    for (int i = 1; i < 10; i++) {       //TODO change to i < count when testing done
+                    for (int i = 1; i < count; i++) {       //TODO change to i < count when testing done
 
                         jsonObject = organisedJsonArticle.getJSONObject(i);   //select to i'th object. This can then get information extracted from it
 
@@ -198,6 +207,8 @@ public class NewsMain extends AppCompatActivity {
 
                             for (int counter = 0; counter < jArray.length(); counter++) {     //if there is no category object (a singular category)
                                 categories += jArray.getString(counter);
+                                categories += ", ";
+
                             }
                         } catch (Exception e) {
                             categories = jsonObject.getString(CATEGORY_TAG);
@@ -226,8 +237,8 @@ public class NewsMain extends AppCompatActivity {
                                 creator,
                                 pubDate,
                                 categories,
-                                thumbURL,
-                                link
+                                link,
+                                thumbURL
                         );
                         if((i % 50) == 0){
                             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "  + extractedArticle.toString() );
@@ -245,19 +256,7 @@ public class NewsMain extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 articleListView.setVisibility(View.VISIBLE);
 
-
-
-                adapter = new NewsAdapter(getBaseContext(), articles);
-
-                articleListView.setChoiceMode(articleListView.CHOICE_MODE_SINGLE);
-                articleListView.setSelector(android.R.color.darker_gray);
-
-                articleListView.setAdapter(adapter);
-
-
-
-
-
+                adapter.notifyDataSetChanged();
 
             }
         }

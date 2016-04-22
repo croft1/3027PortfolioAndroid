@@ -13,7 +13,7 @@ public class NewsFullArticleActivity extends AppCompatActivity {
 
 
     private WebView webView;
-    private static final String DEFAULT_PAGE_URL = "http://www.abc.net.au";// file:///android_asset/web_view.html
+    private static final String DEFAULT_PAGE_URL = "http://www.google.com";// file:///android_asset/web_view.html
     private String requestedURL;
 
     @Override
@@ -28,7 +28,7 @@ public class NewsFullArticleActivity extends AppCompatActivity {
 
         //get intent with request url from list objects data
         Intent i = getIntent();
-        requestedURL = i.getParcelableExtra(NewsMain.REQUEST_ARTICLE_URL);
+        requestedURL = i.getStringExtra(NewsMain.REQUEST_ARTICLE_URL);
 
 
         //simply show the web page of item clicked in full inside the app

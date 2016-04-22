@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -89,18 +90,20 @@ public class NewsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return articles.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return articles.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return articles.get(position).getId();
     }
+
+
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView iv;

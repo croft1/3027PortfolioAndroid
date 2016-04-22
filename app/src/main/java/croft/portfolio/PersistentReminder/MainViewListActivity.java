@@ -36,6 +36,8 @@ public class MainViewListActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private Toast currentToast;
 
+    private int selectedItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class MainViewListActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainViewListActivity.this, ViewDetailedReminderActivity.class);
                 intent.putExtra(EDIT_REMINDER_INTENT, result);
+                selectedItem = pos;
                 startActivityForResult(intent, EDIT_REQUEST);
 
             }
@@ -267,10 +270,11 @@ public class MainViewListActivity extends AppCompatActivity {
                                 }
                             }
                             if (has){
-                                reminders.set(count, r);     //replace updated object in array when its found
+                                reminders.set(selectedItem, r);     //replace updated object in array when its found
+                                //reminders.set(count, r);
                                 pushToast(r.getTitle() + " updated.");
                             }
-
+                            refreshListView();
 
                         }
 

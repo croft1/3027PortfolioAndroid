@@ -38,6 +38,8 @@ public class BasicAddReminderActivity extends AppCompatActivity {
         setContentView(R.layout.reminder_activity_add);
         setTitle("Add BasicReminder");
 
+
+        //formatting the UI elements
         addReminder = (Button) findViewById(R.id.addReminderButton);
         addReminder.setEnabled(false);
         addReminder.setHighlightColor(Color.LTGRAY);
@@ -46,6 +48,8 @@ public class BasicAddReminderActivity extends AppCompatActivity {
         inputDate = (Button) findViewById(R.id.inputDate);
         inputDescription = (EditText) findViewById(R.id.inputDescription);
 
+
+        //text changed listeners monitor before during and after text is input to perform actions
         inputTitle.addTextChangedListener(w);
         inputDescription.addTextChangedListener(w);
 
@@ -59,7 +63,9 @@ public class BasicAddReminderActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            //TODO: set limits for the number of characters for input and output.
+
+            //ensure that the text entered in each field, and only will enable the button when it is enabled
+
             if (inputTitle.getText().toString().length() > 0 &&
                     inputDate.getText().toString() != "Press to choose date" &&
                     inputDescription.getText().toString().length() > 0) {
@@ -81,28 +87,48 @@ public class BasicAddReminderActivity extends AppCompatActivity {
 
         switch(v.getId()) {
             case R.id.addReminderButton:
+
+/*
+                    //checking
+                if(inputDate.getText().toString().length() > 0 &&
+                inputDescription.getText().toString().length() > 0 &&           //doubled up
+                        inputTitle.getText().toString().length() > 0){
+*/
+
+                //set variables to create objects with
                 String submittedTitle = inputTitle.getText().toString();
                 String submittedDescription = inputDescription.getText().toString();
                 String submittedDate = inputDate.getText().toString();
 
+                //object created
                 BasicReminder submittedBasicReminder = new BasicReminder(submittedTitle, submittedDescription, submittedDate,false);
 
+                //notify
+                t = Toast.makeText(getApplicationContext(), ("BasicReminder: " + submittedBasicReminder.getTitle() + " created."), Toast.LENGTH_SHORT);
 
-
+                //pass intent fro here to the basic view list activity with the reminder object as an extra, which will be fetched using the rmeinder 'tag', 'id', or whatever
                 Intent i = new Intent(this, BasicViewListActivity.class);
                 i.putExtra("reminder", submittedBasicReminder);
+
+                setResult(RESULT_OK, i);
+                t.show();       //show toast, don't need to create another activity. We close this one as the other is in the background
+                finish();       //closing activity
+/*
+                }else{
+                    break;          //escape when values are empty
+                }
+                   */
+
                 //BasicViewListActivity.addReminder(submittedBasicReminder);
 
                 //startActivity(i);
-                t = Toast.makeText(getApplicationContext(), ("BasicReminder: " + submittedBasicReminder.getTitle() + " created."), Toast.LENGTH_SHORT);
 
-                t.show();
-                setResult(RESULT_OK, i);
-                finish();
 
                 break;
 
             case R.id.inputDate:
+
+                //listening onto the date picker the input of a date picker
                 final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -115,7 +141,7 @@ public class BasicAddReminderActivity extends AppCompatActivity {
 
                     }
                 };
-
+                //which is set up here , and shown. thats monitored from there
                 new DatePickerDialog(BasicAddReminderActivity.this, date, calendar
                         .get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
@@ -133,6 +159,8 @@ public class BasicAddReminderActivity extends AppCompatActivity {
 
     private void updateLabel() {
 
+
+        //using formatter tools, it takes the datepicker value and sets the text of the button to open the dialog to the date selected
         String dateFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
 

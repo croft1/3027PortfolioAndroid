@@ -63,8 +63,12 @@ public class BasicViewListActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(BasicViewListActivity.this, BasicViewDetailedReminderActivity.class);
                     intent.putExtra("detailedReminder", result);
+                    selectedIndex = i;
+                    intent.putExtra("index", i);
+
+
                     startActivityForResult(intent, EDIT_REQUEST);
-                    finish();
+
                 }
             }
         );
@@ -113,9 +117,9 @@ public class BasicViewListActivity extends AppCompatActivity {
                 //without notifyDataSetChanged, the screen only updates if list items are out of view...
 
                 adapter.notifyDataSetChanged();     //tells the adapter i changed list, it needs change itself
-                Intent update = new Intent(this, BasicViewListActivity.class);
-                this.finish();
-                startActivity(update);
+                //Intent update = new Intent(this, BasicViewListActivity.class);
+               // this.finish();
+                //startActivity(update);
                 return true;
 
             case R.id.clear_reminders:
@@ -169,16 +173,16 @@ public class BasicViewListActivity extends AppCompatActivity {
             case EDIT_REQUEST:
                 if (resultCode == RESULT_OK) {
 
+                    Intent i = getIntent();
 
-                    BasicReminder r = data.getParcelableExtra("edit");   //breaks here if you hit back after editing reminder
-                    basicReminders.add(r);
+                    basicReminders.get(selectedIndex).setComplete(true);
 
 
                     adapter.notifyDataSetChanged();
-                    Intent update = new Intent(this, BasicViewListActivity.class);
+                    //Intent update = new Intent(this, BasicViewListActivity.class);
+                    //startActivity(update);
 
-                    this.finish();
-                    startActivity(update);
+                    //this.finish();
                 }
                 break;
             default:

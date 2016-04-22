@@ -24,12 +24,16 @@ public class BasicReminder implements Parcelable, Comparable<BasicReminder>{
 
     @TargetApi(19)      //not available to target API 14 we're running
     public int compareTo(BasicReminder other){
+
+        //this is used to take 2 objects, their date data compare and reshuffle their position
         if (getDueDate() == null || other.getDueDate() == null)
             return 0;
         return getDueDate().compareTo(other.getDueDate());
     }
 
     //default
+
+    //default constructor
     public BasicReminder(){
         setTitle("Undefined");
         setDescription("Undefined");
@@ -37,10 +41,14 @@ public class BasicReminder implements Parcelable, Comparable<BasicReminder>{
     }
 
     //was gonna leave bool out of constructor. When editing values on detailed activity, recreating and storing objects couldnt have compelte changed. It was pointless to have another identical constructor with just the bool added in
+
+    //
     public BasicReminder(String newTitle, String newDescription, String ddMMyyyy, boolean complete){
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date d = null;
+
+        //try catch to ensure that the string input is of a valid format
         try {
             d = df.parse(ddMMyyyy);
             setDueDate(d);
@@ -48,9 +56,10 @@ public class BasicReminder implements Parcelable, Comparable<BasicReminder>{
             e.printStackTrace();
             System.err.println("BasicReminder date input was in the wrong format");
 
-            d = new Date((long) 0);
+            d = new Date((long) 0); ///when theres an error in the date, you set it to 0, which i s0 from epoch
         }
 
+        //now we simple set the variables to retrieve later
         setTitle(newTitle);
         setDescription(newDescription);
         setComplete(complete);
@@ -74,8 +83,10 @@ public class BasicReminder implements Parcelable, Comparable<BasicReminder>{
 
     }
 
-
+        //creator is used as a parcelable method that condesnses and expands the data of each reminder through their obects
     public static final Creator<BasicReminder> CREATOR = new Creator<BasicReminder>() {
+
+
         @Override
         public BasicReminder createFromParcel(Parcel in) {
             return new BasicReminder(in);
@@ -94,7 +105,7 @@ public class BasicReminder implements Parcelable, Comparable<BasicReminder>{
 
     // outputs the format the parcel writes values
     @Override
-    public void writeToParcel(Parcel parcel, int flags) {
+    public void writeToParcel(Parcel parcel, int flags) {       //need to be in  same order of reading and writing
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeLong(dueDate.getTime());
@@ -134,8 +145,13 @@ public class BasicReminder implements Parcelable, Comparable<BasicReminder>{
         return complete;
     }
 
-    public void setComplete(boolean complete) {
-        this.complete = complete;
+    public void setComplete(Boolean complete) {
+
+        //flips the boolean since this is only ever called when we detect a change, not everytime we save an edit
+        this.complete = !this.complete;
+
+        //cout objects, to display when you show counting
+
         if(complete){
             totalIncomplete --;
         }else{

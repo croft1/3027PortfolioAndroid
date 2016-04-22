@@ -36,12 +36,12 @@ public class CalculatorMain extends AppCompatActivity {
         setContentView(R.layout.calculator_main);
         setTitle("Simple Calculator");
 
-
+        //set up button, disable until you are allowed to calculate
         Button calcBtn = (Button) findViewById(R.id.calculate);
         calcBtn.setEnabled(false);
         calcBtn.setBackgroundColor(Color.parseColor("#ff5a595b"));
 
-
+            //set up references to UI objects to uselater
         firstNumberInput = (EditText) findViewById(R.id.firstNumberInput);
         secondNumberInput = (EditText) findViewById(R.id.secondNumberInput);
         firstNumView = (TextView) findViewById(R.id.firstNumView);
@@ -62,15 +62,15 @@ public class CalculatorMain extends AppCompatActivity {
         bSubtract.setText(SUBTRACTION_SYMBOL);
 
 
-
+        //click listener is to detect when a click occurs
         View.OnClickListener opButtonListener = new View.OnClickListener(){
             @Override
-            public void onClick(View v){
-                setSelectedOperation( ((Button) v).getText().toString());
-                System.out.println(getSelectedOperation() + "onCLICKLISTENER WORKING");
+            public void onClick(View v){        //anonymous on click method taking in a view of what operation button is clicked
+                setSelectedOperation( ((Button) v).getText().toString());           //set operation to the currently chosen element
+                //System.out.println(getSelectedOperation() + "onCLICKLISTENER WORKING");
                 opView.setText(getSelectedOperation());
                 if(calcEnableAllowed()){
-                    enableCalculateButton();
+                    enableCalculateButton();    //
                 }
             }
         };
@@ -82,6 +82,8 @@ public class CalculatorMain extends AppCompatActivity {
 
     }
 
+
+    //text watcher sees the number inputs and changes its response depending on what is input
     private final TextWatcher w = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -110,6 +112,7 @@ public class CalculatorMain extends AppCompatActivity {
         double firstNumber = Double.valueOf(firstNumberInput.getText().toString());
         double secondNumber = Double.valueOf(secondNumberInput.getText().toString());
 
+        //ensures you can't divide by zero
         if(selectedOperation.toString() == DIVISION_SYMBOL &&                      //checking div by 0
                 (secondNumber == 0|| firstNumber == 0)){
 
@@ -118,9 +121,11 @@ public class CalculatorMain extends AppCompatActivity {
         }else{
 
 
-
+            //create calculator object which is made to store the question data and perform it inside
             Calculator calc = new Calculator(firstNumber, secondNumber, selectedOperation);
 
+
+            //form the calc object we update the UI
             TextView resultText = (TextView) findViewById(R.id.resultDisplayer);
             resultText.setText(String.valueOf(calc.getAnswer()));
 
@@ -136,7 +141,7 @@ public class CalculatorMain extends AppCompatActivity {
 
 
     public boolean calcEnableAllowed(){
-
+    //method to call in certain parts to see if  calc button when parameters are met
         return selectedOperation != null &&                               //check empty or unselected
                 secondNumberInput.getText().toString().length() > 0 &&
                 firstNumberInput.getText().toString().length() > 0;
@@ -144,11 +149,14 @@ public class CalculatorMain extends AppCompatActivity {
 
     }
 
+    //simply enables button
     public void enableCalculateButton() {
         Button c = (Button) findViewById(R.id.calculate);                   //activate button
         c.setBackgroundColor(getPrimary());
         c.setEnabled(true);
     }
+
+    //getters setters
 
     public int getAccent() {
         return ContextCompat.getColor(getApplicationContext(), R.color.colorAccent);

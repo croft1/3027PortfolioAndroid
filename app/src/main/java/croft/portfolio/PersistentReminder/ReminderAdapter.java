@@ -20,12 +20,12 @@ import croft.portfolio.R;
 public class ReminderAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Reminder> Reminders;
+    private ArrayList<Reminder> reminders;
     private int count;  //for adding count at the bottom
 
     public ReminderAdapter(Context context, ArrayList<Reminder> Reminders) {
         this.context = context;
-        this.Reminders = Reminders;
+        this.reminders = Reminders;
     }
 
     public static class ViewHolder {
@@ -36,11 +36,11 @@ public class ReminderAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return Reminders.size();
+        return reminders.size();
     }
 
     public Reminder getItem(int i) {
-        return Reminders.get(i);
+        return reminders.get(i);
     }
 
     public long getItemId(int i) {
@@ -68,14 +68,14 @@ public class ReminderAdapter extends BaseAdapter {
             vh = (ViewHolder) view.getTag();
         }
 
-        String title = Reminders.get(i).getTitle();
-        String description = Reminders.get(i).getDescription();
-        Date dueDate = Reminders.get(i).getDueDate();
-        Boolean completed = Reminders.get(i).isComplete();
+        String title = reminders.get(i).getTitle();
+        String description = reminders.get(i).getDescription();
+        String dueDate = reminders.get(i).getDueDateString();
+        Boolean completed = reminders.get(i).isComplete();
 
         vh.title.setText(title);
         vh.description.setText(description);
-        vh.date.setText(Reminders.get(i).getDueDateString());
+        vh.date.setText(dueDate.toString());
 
         if(completed){
             vh.complete.setText("Complete!");

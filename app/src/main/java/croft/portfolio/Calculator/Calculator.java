@@ -10,6 +10,7 @@ public class Calculator {
     double firstNumber;
     double secondNumber;
     String operation;
+    double answer;
 
     public double getAnswer() {
         return answer;
@@ -31,9 +32,8 @@ public class Calculator {
         return firstNumber;
     }
 
-    double answer;
 
-
+    //calcualtor constructor is called when we have valid inputs. For every single calculation that is required, we create and delete an object
 
     public Calculator(double firstNumber, double secondNumber, String operation){
         setFirstNumber(firstNumber);
@@ -42,10 +42,14 @@ public class Calculator {
         answer = performOperation();
     }
 
+
+
     public double performOperation(){
 
-        double resultOfCalculation = 123456789;
+        double resultOfCalculation = 123456789;         ///just a random default
 
+
+        //detect which operation button is selected to do that operation
         switch(operation) {
             case CalculatorMain.ADDITION_SYMBOL:{
                 resultOfCalculation = add();
@@ -54,9 +58,6 @@ public class Calculator {
             case CalculatorMain.DIVISION_SYMBOL:{
                 if(canDivide()){
                     resultOfCalculation = divide();
-                }else{
-                    //TODO: check for divide by 0 on calc press
-
                 }
                 break;
             }
@@ -86,7 +87,7 @@ public class Calculator {
     }
 
     public boolean canDivide(){
-        boolean canDivide = true;
+        boolean canDivide = true;       //simply checks if its by zero
         if(firstNumber == 0 || secondNumber == 0){
             canDivide = false;
         }
@@ -97,7 +98,7 @@ public class Calculator {
         return firstNumber / secondNumber;
     }
 
-    public double roundToTwoDecimalPlaces(double n){
+    public double roundToTwoDecimalPlaces(double n){        //simple algorithm for rounding off
         return Math.round(n * 100.0) / 100.0;
 
 

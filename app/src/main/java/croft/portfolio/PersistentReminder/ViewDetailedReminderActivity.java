@@ -68,7 +68,6 @@ public class ViewDetailedReminderActivity extends AppCompatActivity {
                 i.putExtra(MainViewListActivity.EDIT_REMINDER_INTENT, updatedReminder);     //push this edit reminder intent to main activity
                 setResult(RESULT_OK);
                 Toast.makeText(getApplicationContext(), "Edited", Toast.LENGTH_SHORT);
-                startActivity(i);
                 finish();
                 break;
 
